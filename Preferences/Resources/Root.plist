@@ -32,7 +32,7 @@
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>LOCK SCREEN MUSIC WIDGET - COLORIZATION</string>
+			<string>LOCK SCREEN MUSIC WIDGET - COLORS</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -47,24 +47,6 @@
 			<string>Colorize Widget</string>
 		</dict>
 		<dict>
-			<key>cellClass</key>
-			<string>HBStepperTableCell</string>
-			<key>default</key>
-			<real>13</real>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>lockScreenMusicWidgetCornerRadius</string>
-			<key>label</key>
-			<string>Corner Radius: %i Pixels</string>
-			<key>singularLabel</key>
-			<string>Corner Radius: 1 Pixel</string>
-			<key>max</key>
-			<real>50</real>
-			<key>min</key>
-			<real>0</real>
-		</dict>
-		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
@@ -74,31 +56,113 @@
 			<key>key</key>
 			<string>addLockScreenMusicWidgetBorder</string>
 			<key>label</key>
-			<string>Add Border</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBStepperTableCell</string>
-			<key>default</key>
-			<real>3</real>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>lockScreenMusicWidgetBorderWidth</string>
-			<key>label</key>
-			<string>Border Width: %i Pixels</string>
-			<key>singularLabel</key>
-			<string>Border Width: 1 Pixel</string>
-			<key>max</key>
-			<real>7</real>
-			<key>min</key>
-			<real>1</real>
+			<string>Add Colorized Border</string>
 		</dict>
 		<dict>
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>CONTROL CENTER MUSIC WIDGET - COLORIZATION</string>
+			<string>LOCK SCREEN MUSIC WIDGET - BORDER WIDTH</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>3</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetBorderWidth</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>6</integer>
+			<key>min</key>
+			<integer>1</integer>
+			<key>max</key>
+			<integer>7</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>LOCK SCREEN WIDGET CORNER RADIUS</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>13</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetCornerRadius</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>50</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>50</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>disableTopLeftCornerRadius</string>
+			<key>label</key>
+			<string>No Top Left Round Corner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>disableTopRightCornerRadius</string>
+			<key>label</key>
+			<string>No Top Right Round Corner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>disableBottomLeftCornerRadius</string>
+			<key>label</key>
+			<string>No Bottom Left Round Corner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>disableBottomRightCornerRadius</string>
+			<key>label</key>
+			<string>No Bottom Right Round Corner</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>CONTROL CENTER MUSIC WIDGET - COLORS</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -122,7 +186,7 @@
 			<key>key</key>
 			<string>addControlCenterWidgetBorder</string>
 			<key>label</key>
-			<string>Add Border</string>
+			<string>Add Colorized Border</string>
 		</dict>
 		<dict>
         	<key>cell</key>
@@ -148,7 +212,7 @@
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MUSIC APP - COLORIZATION</string>
+			<string>MUSIC APP - COLORS</string>
 			<key>footerText</key>
 			<string></string>
         </dict>
@@ -174,25 +238,33 @@
 			<key>key</key>
 			<string>addMusicAppBorder</string>
 			<key>label</key>
-			<string>Add Border</string>
+			<string>Add Colorized Border</string>
 		</dict>
 		<dict>
-			<key>cellClass</key>
-			<string>HBStepperTableCell</string>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>MUSIC APP - BORDER WIDTH</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
 			<key>default</key>
-			<real>4</real>
+			<integer>4</integer>
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
 			<string>musicAppBorderWidth</string>
-			<key>label</key>
-			<string>Border Width: %i Pixels</string>
-			<key>singularLabel</key>
-			<string>Border Width: 1 Pixel</string>
-			<key>max</key>
-			<real>15</real>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>14</integer>
 			<key>min</key>
-			<real>1</real>
+			<integer>1</integer>
+			<key>max</key>
+			<integer>15</integer>
+			<key>showValue</key>
+			<true/>
 		</dict>
 		<dict>
         	<key>cell</key>

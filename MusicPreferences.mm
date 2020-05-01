@@ -25,6 +25,10 @@
 		//Springboard
 		@"colorizeLockScreenMusicWidget": @NO,
 		@"lockScreenMusicWidgetCornerRadius": @13,
+		@"disableTopLeftCornerRadius": @NO,
+		@"disableTopRightCornerRadius": @NO,
+		@"disableBottomLeftCornerRadius": @NO,
+		@"disableBottomRightCornerRadius": @NO,
 		@"addLockScreenMusicWidgetBorder": @NO,
 		@"lockScreenMusicWidgetBorderWidth": @3,
 		@"colorizeControlCenterMusicWidget": @NO,
@@ -44,6 +48,10 @@
 
 	_colorizeLockScreenMusicWidget = [_preferences boolForKey: @"colorizeLockScreenMusicWidget"];
 	_lockScreenMusicWidgetCornerRadius = [_preferences integerForKey: @"lockScreenMusicWidgetCornerRadius"];
+	_disableTopLeftCornerRadius = [_preferences boolForKey: @"disableTopLeftCornerRadius"];
+	_disableTopRightCornerRadius = [_preferences boolForKey: @"disableTopRightCornerRadius"];
+	_disableBottomLeftCornerRadius = [_preferences boolForKey: @"disableBottomLeftCornerRadius"];
+	_disableBottomRightCornerRadius = [_preferences boolForKey: @"disableBottomRightCornerRadius"];
 	_addLockScreenMusicWidgetBorder = [_preferences boolForKey: @"addLockScreenMusicWidgetBorder"];
 	_lockScreenMusicWidgetBorderWidth = [_preferences integerForKey: @"lockScreenMusicWidgetBorderWidth"];
 	_colorizeControlCenterMusicWidget = [_preferences boolForKey: @"colorizeControlCenterMusicWidget"];
@@ -73,6 +81,26 @@
 - (NSInteger)lockScreenMusicWidgetCornerRadius
 {
 	return _lockScreenMusicWidgetCornerRadius;
+}
+
+- (BOOL)disableTopLeftCornerRadius
+{
+	return _disableTopLeftCornerRadius;
+}
+
+- (BOOL)disableTopRightCornerRadius
+{
+	return _disableTopRightCornerRadius;
+}
+
+- (BOOL)disableBottomLeftCornerRadius
+{
+	return _disableBottomLeftCornerRadius;
+}
+
+- (BOOL)disableBottomRightCornerRadius
+{
+	return _disableBottomRightCornerRadius;
 }
 
 - (BOOL)addLockScreenMusicWidgetBorder

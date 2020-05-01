@@ -5,6 +5,8 @@
 static MusicPreferences *preferences;
 static Colorizer *colorizer;
 
+int cornerMask = 0;
+
 // ----------------------------------------------------------------------------------------------
 // ---------------- COLORIZE MEDIA PLAYER LOCK SCREEN & CONTROL CENTER WIDGETS ------------------
 // ----------------------------------------------------------------------------------------------
@@ -55,6 +57,7 @@ static void produceLightVibration()
 				{
 					[subview setClipsToBounds: YES];
 					[[subview layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
+					[[subview layer] setMaskedCorners: cornerMask];
 
 					if([preferences addLockScreenMusicWidgetBorder])
 						[[subview layer] setBorderWidth: [preferences lockScreenMusicWidgetBorderWidth]];
@@ -381,6 +384,15 @@ void initMusicWidget()
 	{
 		preferences = [MusicPreferences sharedInstance];
 		colorizer = [Colorizer sharedInstance];
+
+		if(![preferences disableTopLeftCornerRadius])
+			cornerMask += kCALayerMinXMinYCorner;
+		if(![preferences disableTopRightCornerRadius])
+			cornerMask += kCALayerMaxXMinYCorner;
+		if(![preferences disableBottomLeftCornerRadius])
+			cornerMask += kCALayerMinXMaxYCorner;
+		if(![preferences disableBottomRightCornerRadius])
+			cornerMask += kCALayerMaxXMaxYCorner;
 
 		if([preferences vibrateMusicWidget])
 			%init(vibrateMusicWidgetGroup);

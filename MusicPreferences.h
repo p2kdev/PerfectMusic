@@ -9,6 +9,10 @@
 	//Springboard
 	BOOL _colorizeLockScreenMusicWidget;
 	NSInteger _lockScreenMusicWidgetCornerRadius;
+	BOOL _disableTopLeftCornerRadius;
+	BOOL _disableTopRightCornerRadius;
+	BOOL _disableBottomLeftCornerRadius;
+	BOOL _disableBottomRightCornerRadius;
 	BOOL _addLockScreenMusicWidgetBorder;
 	NSInteger _lockScreenMusicWidgetBorderWidth;
 	BOOL _colorizeControlCenterMusicWidget;
@@ -27,6 +31,10 @@
 - (BOOL)enabled;
 - (BOOL)colorizeLockScreenMusicWidget;
 - (NSInteger)lockScreenMusicWidgetCornerRadius;
+- (BOOL)disableTopLeftCornerRadius;
+- (BOOL)disableTopRightCornerRadius;
+- (BOOL)disableBottomLeftCornerRadius;
+- (BOOL)disableBottomRightCornerRadius;
 - (BOOL)addLockScreenMusicWidgetBorder;
 - (NSInteger)lockScreenMusicWidgetBorderWidth;
 - (BOOL)colorizeControlCenterMusicWidget;
