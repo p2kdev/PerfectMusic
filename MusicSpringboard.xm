@@ -394,10 +394,10 @@ void initMusicWidget()
 		if(![preferences disableBottomRightCornerRadius])
 			cornerMask += kCALayerMaxXMaxYCorner;
 
-		if([preferences vibrateMusicWidget])
-			%init(vibrateMusicWidgetGroup);
-		
 		if([preferences colorizeLockScreenMusicWidget] || [preferences colorizeControlCenterMusicWidget])
 			%init(colorizeWidgetGroup);
+
+		if([preferences vibrateMusicWidget] && ![preferences isIpad])
+			%init(vibrateMusicWidgetGroup);
 	}
 }

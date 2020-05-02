@@ -18,6 +18,8 @@
 	BOOL _colorizeControlCenterMusicWidget;
 	BOOL _addControlCenterWidgetBorder;
 	BOOL _vibrateMusicWidget;
+	BOOL _enabledMediaControlWithVolumeButtons;
+	BOOL _swapVolumeButtonsOnLandscapeLeft;
 
 	//MusicApp
 	BOOL _colorizeMusicApp;
@@ -40,10 +42,13 @@
 - (BOOL)colorizeControlCenterMusicWidget;
 - (BOOL)addControlCenterWidgetBorder;
 - (BOOL)vibrateMusicWidget;
+- (BOOL)enabledMediaControlWithVolumeButtons;
+- (BOOL)swapVolumeButtonsOnLandscapeLeft;
 - (BOOL)colorizeMusicApp;
 - (BOOL)addMusicAppBorder;
 - (NSInteger)musicAppBorderWidth;
 - (BOOL)_3AlbumsPerLine;
 - (BOOL)hideQueueHUD;
 - (BOOL)vibrateMusicApp;
+- (BOOL)isIpad;
 @end

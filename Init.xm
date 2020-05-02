@@ -1,5 +1,6 @@
 #import "MusicPreferences.h"
 
+extern void initVolumeControl();
 extern void initMusicWidgetHelper();
 extern void initMusicWidget();
 extern void initMusicApp();
@@ -17,6 +18,7 @@ extern void initMusicAppHelper();
 
             if(isSpringboard) 
             {
+                initVolumeControl();
                 initMusicWidgetHelper();
                 initMusicWidget();
             }

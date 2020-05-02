@@ -3,8 +3,6 @@
 #import "Colorizer.h"
 #include <sys/sysctl.h>
 
-#define IS_iPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-
 NSArray *const NOTCHED_IPHONES = @[@"iPhone10,3", @"iPhone10,6", @"iPhone11,2", @"iPhone11,6", @"iPhone11,8", @"iPhone12,1", @"iPhone12,3", @"iPhone12,5"];
 BOOL isNotchediPhone;
 CGFloat screenWidth;
@@ -15,7 +13,7 @@ static Colorizer *colorizer;
 void roundCorners(UIView* view, double topCornerRadius, double bottomCornerRadius)
 {
 	CGRect bounds = [view bounds];
-	if(!IS_iPAD) bounds.size.height -= 55;
+	if(![preferences isIpad]) bounds.size.height -= 55;
 	
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     [maskLayer setFrame: bounds];
@@ -654,13 +652,13 @@ void initMusicApp()
 
 		isNotchediPhone = [NOTCHED_IPHONES containsObject: getDeviceModel()];
 		
-		if([preferences _3AlbumsPerLine] && !IS_iPAD)
+		if([preferences _3AlbumsPerLine] && ![preferences isIpad])
 		{
 			screenWidth = [[UIScreen mainScreen] bounds].size.width;
 			%init(_3ColumnsAlbumsGroup);
 		} 
 
-		if([preferences vibrateMusicApp] && !IS_iPAD) 
+		if([preferences vibrateMusicApp] && ![preferences isIpad]) 
 			%init(vibrateMusicAppGroup, TimeSlider = NSClassFromString(@"MusicApplication.PlayerTimeControl"));
 
 		if([preferences hideQueueHUD]) 

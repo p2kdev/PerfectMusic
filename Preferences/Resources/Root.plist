@@ -32,6 +32,43 @@
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+			<string>VOLUME BUTTONS</string>
+			<key>footerText</key>
+			<string>'CONTROL MEDIA' OPTION:
+PRESS BOTH VOLUME UP + VOLUME DOWN TO PLAY / PAUSE MEDIA.
+HOLD VOLUME UP FOR NEXT SONG.
+HOLD VOLUME DOWN FOR PREVIOUS SONG.
+'SWAP ON LANDSCAPE LEFT' OPTION SWAPS VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT.
+</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>enabledMediaControlWithVolumeButtons</string>
+			<key>label</key>
+			<string>Control Media</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>swapVolumeButtonsOnLandscapeLeft</string>
+			<key>label</key>
+			<string>Swap On Landscape Left</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
 			<string>LOCK SCREEN MUSIC WIDGET - COLORS</string>
         </dict>
 		<dict>
@@ -194,7 +231,7 @@
 			<key>label</key>
 			<string>MUSIC WIDGET - OTHER OPTIONS</string>
 			<key>footerText</key>
-			<string></string>
+			<string>VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -272,8 +309,9 @@
 			<key>label</key>
 			<string>MUSIC APP - OTHER OPTIONS</string>
 			<key>footerText</key>
-			<string>'3 Albums In Recently Added' SHOWS 3 ALBUMS PER LINE IN RECENTLY ADDED ALBUMS SECTION. IPHONE ONLY.
-'Hide Queue HUD' Hides The Annoying Popup That Shows Up When You Add A Song To The Queue.</string>
+			<string>'3 ALBUMS IN RECENTLY ADDED' SHOWS 3 ALBUMS PER LINE IN RECENTLY ADDED ALBUMS SECTION. IPHONE ONLY.
+'HIDE QUEUE HUD' HIDES THE ANNOYING POPUP THAT SHOWS UP WHEN YOU ADD A SONG TO THE QUEUE.
+VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
         </dict>
 		<dict>
 			<key>cell</key>

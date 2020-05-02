@@ -1,5 +1,7 @@
 #import "MusicPreferences.h"
 
+#define IS_iPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
 @implementation MusicPreferences
 
 + (instancetype)sharedInstance
@@ -34,6 +36,8 @@
 		@"colorizeControlCenterMusicWidget": @NO,
 		@"addControlCenterWidgetBorder": @NO,
 		@"vibrateMusicWidget": @NO,
+		@"enabledMediaControlWithVolumeButtons": @NO,
+		@"swapVolumeButtonsOnLandscapeLeft": @NO,
 
 		//MusicApp
 		@"colorizeMusicApp": @NO,
@@ -57,6 +61,8 @@
 	_colorizeControlCenterMusicWidget = [_preferences boolForKey: @"colorizeControlCenterMusicWidget"];
 	_addControlCenterWidgetBorder = [_preferences boolForKey: @"addControlCenterWidgetBorder"];
 	_vibrateMusicWidget = [_preferences boolForKey: @"vibrateMusicWidget"];
+	_enabledMediaControlWithVolumeButtons = [_preferences boolForKey: @"enabledMediaControlWithVolumeButtons"];
+	_swapVolumeButtonsOnLandscapeLeft = [_preferences boolForKey: @"swapVolumeButtonsOnLandscapeLeft"];
 
 	_colorizeMusicApp = [_preferences boolForKey: @"colorizeMusicApp"];
 	_addMusicAppBorder = [_preferences boolForKey: @"addMusicAppBorder"];
@@ -128,6 +134,16 @@
 	return _vibrateMusicWidget;
 }
 
+- (BOOL)enabledMediaControlWithVolumeButtons
+{
+	return _enabledMediaControlWithVolumeButtons;
+}
+
+- (BOOL)swapVolumeButtonsOnLandscapeLeft
+{
+	return _swapVolumeButtonsOnLandscapeLeft;
+}
+
 - (BOOL)colorizeMusicApp
 {
 	return _colorizeMusicApp;
@@ -156,6 +172,11 @@
 - (BOOL)vibrateMusicApp
 {
 	return _vibrateMusicApp;
+}
+
+- (BOOL)isIpad
+{
+	return IS_iPAD;
 }
 
 @end
