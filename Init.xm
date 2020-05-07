@@ -5,12 +5,17 @@ extern void initMusicWidgetHelper();
 extern void initMusicWidget();
 extern void initMusicApp();
 extern void initMusicAppHelper();
+extern void initExtraButtons();
+extern void initMediaNotification();
+
+static MusicPreferences *preferences;
 
 %ctor
 {
     @autoreleasepool
 	{
-		if([[MusicPreferences sharedInstance] enabled])
+        preferences = [MusicPreferences sharedInstance];
+		if([preferences enabled])
         {
             NSString *processName = [NSProcessInfo processInfo].processName;
             bool isSpringboard = [@"SpringBoard" isEqualToString: processName];
@@ -18,6 +23,10 @@ extern void initMusicAppHelper();
 
             if(isSpringboard) 
             {
+                if([preferences showNotification])
+                    initMediaNotification();
+                if([preferences showExtraButtons])
+                    initExtraButtons();
                 initVolumeControl();
                 initMusicWidgetHelper();
                 initMusicWidget();

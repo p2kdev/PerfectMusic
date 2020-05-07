@@ -123,7 +123,7 @@ static NSString* getDeviceModel()
 			if([preferences addMusicAppBorder])
 			{
 				if(isNotchediPhone)
-					[[[newView layer] sublayers][0] setStrokeColor: [colorizer primaryColor].CGColor];
+					[((CAShapeLayer*)[[newView layer] sublayers][0]) setStrokeColor: [colorizer primaryColor].CGColor];
 				else
 					[[newView layer] setBorderColor: [colorizer primaryColor].CGColor];
 			}

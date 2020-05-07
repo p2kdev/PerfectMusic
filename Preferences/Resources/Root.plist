@@ -69,6 +69,44 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+			<string>MEDIA NOTIFICATION</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>showNotification</string>
+			<key>label</key>
+			<string>Show Notification On New Song</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SHUFFLE - REPEAT BUTTONS</string>
+			<key>footerText</key>
+			<string>ADDS SHUFFLE AND REPEAT BUTTONS TO THE MUSIC WIDGET ON LOCK SCREEN AND CONTROL CENTER.</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>showExtraButtons</string>
+			<key>label</key>
+			<string>Add Shuffle And Rpeat Buttons</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
 			<string>LOCK SCREEN MUSIC WIDGET - COLORS</string>
         </dict>
 		<dict>

@@ -6,7 +6,14 @@
 
 	BOOL _enabled;
 
+	//General
+	BOOL _enabledMediaControlWithVolumeButtons;
+	BOOL _swapVolumeButtonsOnLandscapeLeft;
+
+	BOOL _showNotification;
+
 	//Springboard
+	BOOL _showExtraButtons;
 	BOOL _colorizeLockScreenMusicWidget;
 	NSInteger _lockScreenMusicWidgetCornerRadius;
 	BOOL _disableTopLeftCornerRadius;
@@ -18,8 +25,6 @@
 	BOOL _colorizeControlCenterMusicWidget;
 	BOOL _addControlCenterWidgetBorder;
 	BOOL _vibrateMusicWidget;
-	BOOL _enabledMediaControlWithVolumeButtons;
-	BOOL _swapVolumeButtonsOnLandscapeLeft;
 
 	//MusicApp
 	BOOL _colorizeMusicApp;
@@ -31,6 +36,10 @@
 }
 + (instancetype)sharedInstance;
 - (BOOL)enabled;
+- (BOOL)showNotification;
+- (BOOL)enabledMediaControlWithVolumeButtons;
+- (BOOL)swapVolumeButtonsOnLandscapeLeft;
+- (BOOL)showExtraButtons;
 - (BOOL)colorizeLockScreenMusicWidget;
 - (NSInteger)lockScreenMusicWidgetCornerRadius;
 - (BOOL)disableTopLeftCornerRadius;
@@ -42,8 +51,6 @@
 - (BOOL)colorizeControlCenterMusicWidget;
 - (BOOL)addControlCenterWidgetBorder;
 - (BOOL)vibrateMusicWidget;
-- (BOOL)enabledMediaControlWithVolumeButtons;
-- (BOOL)swapVolumeButtonsOnLandscapeLeft;
 - (BOOL)colorizeMusicApp;
 - (BOOL)addMusicAppBorder;
 - (NSInteger)musicAppBorderWidth;

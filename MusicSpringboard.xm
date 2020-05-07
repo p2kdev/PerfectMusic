@@ -310,7 +310,9 @@ static void produceLightVibration()
 
 	- (void)_updateButtonVisualStyling: (id)arg1
 	{
-		if(![colorizer primaryColor]) %orig;
+		if([colorizer primaryColor]) [self colorize];
+		else 
+			%orig;
 	}
 
 	%new
@@ -318,9 +320,18 @@ static void produceLightVibration()
 	{
 		if([colorizer primaryColor])
 		{
+			[[[self leftButton] imageView] setCustomTintColor: [colorizer primaryColor]];
 			colorizeUIView([[self leftButton] imageView], nil, [colorizer primaryColor], nil);
+			[[[self middleButton] imageView] setCustomTintColor: [colorizer primaryColor]];
 			colorizeUIView([[self middleButton] imageView], nil, [colorizer primaryColor], nil);
+			[[[self rightButton] imageView] setCustomTintColor: [colorizer primaryColor]];
 			colorizeUIView([[self rightButton] imageView], nil, [colorizer primaryColor], nil);
+			
+			if([preferences showExtraButtons])
+			{
+				colorizeUIView([[self shuffleButton] imageView], nil, [colorizer primaryColor], nil);
+				colorizeUIView([[self repeatButton] imageView], nil, [colorizer primaryColor], nil);
+			}
 		}
 		else
 		{
@@ -384,7 +395,7 @@ void initMusicWidget()
 	{
 		preferences = [MusicPreferences sharedInstance];
 		colorizer = [Colorizer sharedInstance];
-
+		
 		if(![preferences disableTopLeftCornerRadius])
 			cornerMask += kCALayerMinXMinYCorner;
 		if(![preferences disableTopRightCornerRadius])

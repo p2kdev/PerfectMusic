@@ -13,13 +13,13 @@
 - (NSString*)bundleIdentifier;
 @end
 
-@interface SpringBoard: NSObject
+@interface UIApplication ()
+- (UIDeviceOrientation)_frontMostAppOrientation;
+@end
+
+@interface SpringBoard: UIApplication
 - (void)takeScreenshot;
 - (SBApplication*)_accessibilityFrontMostApplication;
 - (void)goForward;
 - (void)goBackward;
-@end
-
-@interface UIApplication ()
-- (UIDeviceOrientation)_frontMostAppOrientation;
 @end

@@ -24,7 +24,13 @@
 	@{
 		@"enabled": @NO,
 
+		//General
+		@"enabledMediaControlWithVolumeButtons": @NO,
+		@"swapVolumeButtonsOnLandscapeLeft": @NO,
+		@"showNotification": @NO,
+
 		//Springboard
+		@"showExtraButtons": @NO,
 		@"colorizeLockScreenMusicWidget": @NO,
 		@"lockScreenMusicWidgetCornerRadius": @13,
 		@"disableTopLeftCornerRadius": @NO,
@@ -36,8 +42,6 @@
 		@"colorizeControlCenterMusicWidget": @NO,
 		@"addControlCenterWidgetBorder": @NO,
 		@"vibrateMusicWidget": @NO,
-		@"enabledMediaControlWithVolumeButtons": @NO,
-		@"swapVolumeButtonsOnLandscapeLeft": @NO,
 
 		//MusicApp
 		@"colorizeMusicApp": @NO,
@@ -50,6 +54,11 @@
 
 	_enabled = [_preferences boolForKey: @"enabled"];
 
+	_enabledMediaControlWithVolumeButtons = [_preferences boolForKey: @"enabledMediaControlWithVolumeButtons"];
+	_swapVolumeButtonsOnLandscapeLeft = [_preferences boolForKey: @"swapVolumeButtonsOnLandscapeLeft"];
+	_showNotification = [_preferences boolForKey: @"showNotification"];
+
+	_showExtraButtons = [_preferences boolForKey: @"showExtraButtons"];
 	_colorizeLockScreenMusicWidget = [_preferences boolForKey: @"colorizeLockScreenMusicWidget"];
 	_lockScreenMusicWidgetCornerRadius = [_preferences integerForKey: @"lockScreenMusicWidgetCornerRadius"];
 	_disableTopLeftCornerRadius = [_preferences boolForKey: @"disableTopLeftCornerRadius"];
@@ -61,8 +70,6 @@
 	_colorizeControlCenterMusicWidget = [_preferences boolForKey: @"colorizeControlCenterMusicWidget"];
 	_addControlCenterWidgetBorder = [_preferences boolForKey: @"addControlCenterWidgetBorder"];
 	_vibrateMusicWidget = [_preferences boolForKey: @"vibrateMusicWidget"];
-	_enabledMediaControlWithVolumeButtons = [_preferences boolForKey: @"enabledMediaControlWithVolumeButtons"];
-	_swapVolumeButtonsOnLandscapeLeft = [_preferences boolForKey: @"swapVolumeButtonsOnLandscapeLeft"];
 
 	_colorizeMusicApp = [_preferences boolForKey: @"colorizeMusicApp"];
 	_addMusicAppBorder = [_preferences boolForKey: @"addMusicAppBorder"];
@@ -77,6 +84,26 @@
 - (BOOL)enabled
 {
 	return _enabled;
+}
+
+- (BOOL)enabledMediaControlWithVolumeButtons
+{
+	return _enabledMediaControlWithVolumeButtons;
+}
+
+- (BOOL)swapVolumeButtonsOnLandscapeLeft
+{
+	return _swapVolumeButtonsOnLandscapeLeft;
+}
+
+- (BOOL)showNotification
+{
+	return _showNotification;
+}
+
+- (BOOL)showExtraButtons
+{
+	return _showExtraButtons;
 }
 
 - (BOOL)colorizeLockScreenMusicWidget
@@ -132,16 +159,6 @@
 - (BOOL)vibrateMusicWidget
 {
 	return _vibrateMusicWidget;
-}
-
-- (BOOL)enabledMediaControlWithVolumeButtons
-{
-	return _enabledMediaControlWithVolumeButtons;
-}
-
-- (BOOL)swapVolumeButtonsOnLandscapeLeft
-{
-	return _swapVolumeButtonsOnLandscapeLeft;
 }
 
 - (BOOL)colorizeMusicApp

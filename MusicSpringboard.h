@@ -1,9 +1,41 @@
-@interface SBApplication: NSObject
+@interface _MPCPlayerShuffleCommand : NSObject
+- (BOOL)supportsChangeShuffle;
+- (BOOL)supportsAdvanceShuffle;
+- (long long)currentShuffleType;
+- (id)advance;
+@end
+
+@interface _MPCPlayerRepeatCommand : NSObject
+- (BOOL)supportsChangeRepeat;
+- (BOOL)supportsAdvanceRepeat;
+- (long long)currentRepeatType;
+- (id)advance;
+@end
+
+@interface MPCPlayerResponseTracklist : NSObject
+- (_MPCPlayerRepeatCommand *)repeatCommand;
+- (_MPCPlayerShuffleCommand *)shuffleCommand;
+@end
+
+@interface MPCPlayerResponse : NSObject
+- (MPCPlayerResponseTracklist *)tracklist;
+@end
+
+@interface MPCPlayerChangeRequest : NSObject
++ (void)performRequest:(id)arg1 completion:(/*^block*/ id)arg2;
+@end
+
+@interface SBApplication : NSObject
 @end
 
 @interface UILabel ()
 - (UIColor*)customTextColor;
 - (void)setCustomTextColor:(UIColor*)arg;
+@end
+
+@interface UIImageView ()
+- (UIColor *)customTintColor;
+- (void)setCustomTintColor:(UIColor *)arg;
 @end
 
 @interface CAShapeLayer ()
@@ -14,20 +46,40 @@
 @interface SBMediaController: NSObject
 + (id)sharedInstance;
 - (SBApplication*)nowPlayingApplication;
-@end
-
-@interface MediaControlsTransportButton: UIButton
-@end
-
-@interface MediaControlsTransportStackView: UIView
-@property(nonatomic, retain) MediaControlsTransportButton *leftButton;
-@property(nonatomic, retain) MediaControlsTransportButton *middleButton;
-@property(nonatomic, retain) MediaControlsTransportButton *rightButton;
-- (void)_updateButtonVisualStyling: (UIButton*)button;
-- (void)colorize;
+- (id)_nowPlayingInfo;
 @end
 
 @interface MPButton: UIButton
+- (BOOL)isHolding;
+@end
+
+@interface MediaControlsTransportButton : MPButton
+@end
+
+@interface MediaControlsTransportStackView : UIView
+@property(nonatomic, retain) MediaControlsTransportButton *leftButton;
+@property(nonatomic, retain) MediaControlsTransportButton *middleButton;
+@property(nonatomic, retain) MediaControlsTransportButton *rightButton;
+- (id)_createTransportButton;
+- (MediaControlsTransportButton*)tvRemoteButton;
+- (MediaControlsTransportButton*)languageOptionsButton;
+- (void)_updateButtonVisualStyling:(UIButton *)button;
+- (void)colorize;
+- (id)initWithFrame: (CGRect)arg1;
+- (void)shuffleButtonPressed;
+- (void)repeatButtonPressed;
+- (MediaControlsTransportButton*)repeatButton;
+- (void)setRepeatButton: (MediaControlsTransportButton*)button;
+- (MediaControlsTransportButton*)shuffleButton;
+- (void)setShuffleButton: (MediaControlsTransportButton*)button;
+- (void)_updateButtonLayout;
+- (void)updateButtonIcons: (BOOL)arg;
+- (void)setResponse: (MPCPlayerResponse*)arg;
+- (id)hasExtraButtons;
+- (void)setHasExtraButtons: (id)arg;
+- (void)layoutSubviews;
+- (void)_updateVisualStylingForButtons;
+-(MPCPlayerResponse *)response;
 @end
 
 @interface CCUICAPackageView: UIView
@@ -140,7 +192,4 @@
 - (UIView*)backgroundView;
 - (BOOL)isOnScreen;
 - (void)colorize;
-@end
-
-@interface CCUIContentModuleContentContainerView : UIView
 @end

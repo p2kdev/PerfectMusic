@@ -63,7 +63,6 @@
 - (void)updateButtonColor
 {
 	[[self layer] setCornerRadius: 7];
-	[[self layer] setCornerCurve: kCACornerCurveContinuous];
 
 	id type = [self specialButton]; // type 1 == lyrics button, type 2 == queue button, type 3 == queue header buttons
 

@@ -46,6 +46,29 @@
 
 %end
 
+%hook UIImageView
+
+- (void)setTintColor: (UIColor*)arg
+{
+	UIColor *color = [self customTintColor];
+	if(color) %orig(color);
+	else %orig;
+}
+
+%new
+- (UIColor*)customTintColor
+{
+	return (UIColor*)objc_getAssociatedObject(self, @selector(customTintColor));
+}
+
+%new
+- (void)setCustomTintColor: (UIColor*)arg
+{
+	objc_setAssociatedObject(self, @selector(customTintColor), arg, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+%end
+
 void initMusicWidgetHelper()
 {
 	%init;

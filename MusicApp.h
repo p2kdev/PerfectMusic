@@ -9,6 +9,10 @@
 + (id)roundedRectBezierPath:(CGRect)arg1 withTopCornerRadius:(double)arg2 withBottomCornerRadius:(double)arg3;
 @end
 
+@interface CALayer ()
+-(void)setCornerCurve:(NSString *)arg1;
+@end
+
 @interface UIView ()
 - (UIColor *)customBackgroundColor;
 - (void)setCustomBackgroundColor: (UIColor *)arg;
