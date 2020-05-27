@@ -1,4 +1,5 @@
 #import "MusicPreferences.h"
+#import "SparkColourPickerUtils.h"
 
 #define IS_iPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 
@@ -49,7 +50,8 @@
 		@"musicAppBorderWidth": @4,
 		@"_3AlbumsPerLine": @NO,
 		@"hideQueueHUD": @NO,
-		@"vibrateMusicApp": @NO
+		@"vibrateMusicApp": @NO,
+		@"enableMusicAppCustomTint": @NO
 	}];
 
 	_enabled = [_preferences boolForKey: @"enabled"];
@@ -77,6 +79,12 @@
 	__3AlbumsPerLine = [_preferences boolForKey: @"_3AlbumsPerLine"];
 	_hideQueueHUD = [_preferences boolForKey: @"hideQueueHUD"];
 	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
+	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];
+	if(_enableMusicAppCustomTint)
+	{
+		NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.colors.plist"];
+		_customMusicAppTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppTintColor"] withFallback: @"#FF9400"];
+	}
 
 	return self;
 }
@@ -189,6 +197,16 @@
 - (BOOL)vibrateMusicApp
 {
 	return _vibrateMusicApp;
+}
+
+- (BOOL)enableMusicAppCustomTint
+{
+	return _enableMusicAppCustomTint;
+}
+
+- (UIColor*)customMusicAppTintColor
+{
+	return _customMusicAppTintColor;
 }
 
 - (BOOL)isIpad

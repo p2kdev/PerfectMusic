@@ -13,7 +13,8 @@ static Colorizer *colorizer;
 void roundCorners(UIView* view, double topCornerRadius, double bottomCornerRadius)
 {
 	CGRect bounds = [view bounds];
-	if(![preferences isIpad]) bounds.size.height -= 55;
+	if(![preferences isIpad])
+		bounds.size.height -= 54;
 	
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     [maskLayer setFrame: bounds];
@@ -99,7 +100,7 @@ static NSString* getDeviceModel()
 			[newView setTag: 0xffeedd];
 			[newView setOpaque: NO];
 			[newView setClipsToBounds: YES];
-			
+
 			if([preferences addMusicAppBorder])
 			{
 				if(isNotchediPhone)
@@ -260,15 +261,12 @@ static NSString* getDeviceModel()
 %new
 - (void)colorize
 {
-	if([self tintColor] != [colorizer primaryColor])
-	{
-		[self setCustomTintColor: [colorizer primaryColor]];
-		[self setTintColor: [colorizer primaryColor]];
+	[self setCustomTintColor: [colorizer primaryColor]];
+	[self setTintColor: [colorizer primaryColor]];
 
-		UIImageView *ellipsisImageView = MSHookIvar<UIImageView*>(self, "ellipsisImageView");
-		[ellipsisImageView setCustomTintColor: [colorizer backgroundColor]];
-		[ellipsisImageView setTintColor: [colorizer backgroundColor]];
-	}
+	UIImageView *ellipsisImageView = MSHookIvar<UIImageView*>(self, "ellipsisImageView");
+	[ellipsisImageView setCustomTintColor: [colorizer backgroundColor]];
+	[ellipsisImageView setTintColor: [colorizer backgroundColor]];
 }
 
 %end
@@ -280,20 +278,17 @@ static NSString* getDeviceModel()
 %new
 - (void)colorize
 {
-	if([self tintColor] != [colorizer primaryColor])
-	{
-		[self setCustomTintColor: [colorizer primaryColor]];
-		[self setTintColor: [colorizer primaryColor]];
+	[self setCustomTintColor: [colorizer primaryColor]];
+	[self setTintColor: [colorizer primaryColor]];
 
-		MSHookIvar<UIColor*>(self, "trackingTintColor") = [colorizer primaryColor];
+	MSHookIvar<UIColor*>(self, "trackingTintColor") = [colorizer primaryColor];
 
-		[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setCustomTextColor: [colorizer primaryColor]];
-		[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setTextColor: [colorizer primaryColor]];
-		[MSHookIvar<UIView*>(self, "remainingTrack") setCustomBackgroundColor: [colorizer secondaryColor]];
-		[MSHookIvar<UIView*>(self, "remainingTrack") setBackgroundColor: [colorizer secondaryColor]];
-		[MSHookIvar<UIView*>(self, "knobView") setCustomBackgroundColor: [colorizer primaryColor]];
-		[MSHookIvar<UIView*>(self, "knobView") setBackgroundColor: [colorizer primaryColor]];
-	}
+	[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setCustomTextColor: [colorizer primaryColor]];
+	[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setTextColor: [colorizer primaryColor]];
+	[MSHookIvar<UIView*>(self, "remainingTrack") setCustomBackgroundColor: [colorizer secondaryColor]];
+	[MSHookIvar<UIView*>(self, "remainingTrack") setBackgroundColor: [colorizer secondaryColor]];
+	[MSHookIvar<UIView*>(self, "knobView") setCustomBackgroundColor: [colorizer primaryColor]];
+	[MSHookIvar<UIView*>(self, "knobView") setBackgroundColor: [colorizer primaryColor]];
 }
 
 %end
@@ -310,14 +305,11 @@ static NSString* getDeviceModel()
 %new
 - (void)colorize
 {
-	if([[self imageView] tintColor] != [colorizer primaryColor])
-	{
-		[[self imageView] setCustomTintColor: [colorizer primaryColor]];
-		[[self imageView] setTintColor: [colorizer primaryColor]];
-		[[[self imageView] layer] setCompositingFilter: 0];
+	[[self imageView] setCustomTintColor: [colorizer primaryColor]];
+	[[self imageView] setTintColor: [colorizer primaryColor]];
+	[[[self imageView] layer] setCompositingFilter: 0];
 
-		[MSHookIvar<UIView*>(self, "highlightIndicatorView") setBackgroundColor: [colorizer primaryColor]];
-	}
+	[MSHookIvar<UIView*>(self, "highlightIndicatorView") setBackgroundColor: [colorizer primaryColor]];
 }
 
 %end
@@ -643,6 +635,19 @@ static NSString* getDeviceModel()
 
 %end
 
+%group customMusicAppTintColorGroup
+
+	%hook UIColor
+
+	+ (id)systemPinkColor
+	{
+		return [preferences customMusicAppTintColor];
+	}
+
+	%end
+
+%end
+
 void initMusicApp()
 {
 	@autoreleasepool
@@ -663,6 +668,9 @@ void initMusicApp()
 
 		if([preferences hideQueueHUD]) 
 			%init(hideQueueHUDGroup, ContextActionsHUDViewController = NSClassFromString(@"MusicApplication.ContextActionsHUDViewController"));
+
+		if([preferences enableMusicAppCustomTint])
+			%init(customMusicAppTintColorGroup);
 
 		if([preferences colorizeMusicApp])
 			%init(NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"),

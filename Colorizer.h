@@ -13,4 +13,5 @@
 - (UIColor*)primaryColor;
 - (UIColor*)secondaryColor;
 - (double)backgroundColorChangeDuration;
+- (void)resetColors;
 @end

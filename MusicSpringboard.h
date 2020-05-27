@@ -53,6 +53,10 @@
 - (BOOL)isHolding;
 @end
 
+@interface LyricifyButton: UIButton
+- (void)setColour: (UIColor*)arg;
+@end
+
 @interface MediaControlsTransportButton : MPButton
 @end
 
@@ -92,6 +96,8 @@
 
 @interface UIView ()
 - (id)_viewControllerForAncestor;
+- (UIColor *)customBackgroundColor;
+- (void)setCustomBackgroundColor:(UIColor *)arg;
 @end
 
 @interface MTVisualStylingProvider: NSObject
@@ -153,7 +159,6 @@
 @end
 
 @interface MTMaterialView: UIView
-- (void)setRecipe:(long long)arg1;
 @end
 
 @interface MPArtworkCatalog : NSObject

@@ -1,4 +1,5 @@
 #include "PMSRootListController.h"
+#import "SparkColourPickerView.h"
 #import "spawn.h"
 
 @implementation PMSRootListController

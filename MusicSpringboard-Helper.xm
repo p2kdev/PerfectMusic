@@ -23,6 +23,29 @@
 
 %end
 
+%hook UIView
+
+- (void)setBackgroundColor: (UIColor*)arg
+{
+	UIColor *color = [self customBackgroundColor];
+	if(color) %orig(color);
+	else %orig;
+}
+
+%new
+- (UIColor*)customBackgroundColor
+{
+	return (UIColor*)objc_getAssociatedObject(self, @selector(customBackgroundColor));
+}
+
+%new
+- (void)setCustomBackgroundColor: (UIColor*)arg
+{
+	objc_setAssociatedObject(self, @selector(customBackgroundColor), arg, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+%end
+
 %hook CAShapeLayer
 
 - (void)setStrokeColor: (CGColorRef)arg1

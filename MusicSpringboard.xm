@@ -5,6 +5,8 @@
 static MusicPreferences *preferences;
 static Colorizer *colorizer;
 
+static LyricifyButton *lyricifyButton;
+
 int cornerMask = 0;
 
 // ----------------------------------------------------------------------------------------------
@@ -51,28 +53,25 @@ static void produceLightVibration()
 			[[[[self parentContainerView] containerView] transportStackView] colorize];
 			[[[self volumeContainerView] volumeSlider] colorize];
 
-			for(UIView *subview in [[[[[[nowPlayingHeaderView superview] superview] superview] superview] superview] subviews])
-			{
-				if([subview isKindOfClass: %c(MTMaterialView)])
-				{
-					[subview setClipsToBounds: YES];
-					[[subview layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
-					[[subview layer] setMaskedCorners: cornerMask];
+			if(lyricifyButton)
+				[lyricifyButton setTintColor: [colorizer primaryColor]];
 
-					if([preferences addLockScreenMusicWidgetBorder])
-						[[subview layer] setBorderWidth: [preferences lockScreenMusicWidgetBorderWidth]];
+			UIView *backgroundView = [[[[[[nowPlayingHeaderView superview] superview] superview] superview] superview] subviews][0];
 
-					[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
-					^{
-						[subview setBackgroundColor: [colorizer backgroundColor]];
-						if([preferences addLockScreenMusicWidgetBorder])
-							[[subview layer] setBorderColor: [colorizer primaryColor].CGColor];
-					}
-					completion: nil];
+			[[backgroundView layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
+			[[backgroundView layer] setMaskedCorners: cornerMask];
 
-					break;
-				}
+			if([preferences addLockScreenMusicWidgetBorder])
+				[[backgroundView layer] setBorderWidth: [preferences lockScreenMusicWidgetBorderWidth]];
+
+			[backgroundView setCustomBackgroundColor: [colorizer backgroundColor]];
+			[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
+			^{
+				[backgroundView setBackgroundColor: [colorizer backgroundColor]];
+				if([preferences addLockScreenMusicWidgetBorder])
+					[[backgroundView layer] setBorderColor: [colorizer primaryColor].CGColor];
 			}
+			completion: nil];
 		}
 		else if([preferences colorizeControlCenterMusicWidget] && [[[[[[nowPlayingHeaderView superview] superview] superview] superview] superview] isKindOfClass: %c(CCUIContentModuleContentContainerView)])
 		{
@@ -82,30 +81,18 @@ static void produceLightVibration()
 			[[[[self parentContainerView] containerView] transportStackView] colorize];
 			[[[self volumeContainerView] volumeSlider] colorize];
 
-			if([self backgroundView] && [[self backgroundView] isKindOfClass: %c(MediaControlsMaterialView)])
-			{
-				if([[[self backgroundView] subviews] count] > 0 && [[[self backgroundView] subviews][0] isKindOfClass: %c(MTMaterialView)])
-				{
-					MTMaterialView *materialView = (MTMaterialView*)[[self backgroundView] subviews][0];
-					SBMediaController *media = [%c(SBMediaController) sharedInstance];
-					if(media && [media nowPlayingApplication])
-					{
-						[[materialView layer] setFilters: 0];
-						[materialView setRecipe: 8];
+			UIView *backgroundView = [nowPlayingHeaderView superview];
 
-						if([preferences addControlCenterWidgetBorder])
-							[[materialView layer] setBorderWidth: 3.0f];
-						
-						[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
-						^{
-							[materialView setBackgroundColor: [colorizer backgroundColor]];
-							if([preferences addControlCenterWidgetBorder])
-								[[materialView layer] setBorderColor: [colorizer primaryColor].CGColor];
-						}
-						completion: nil];
-					}
-				}
+			if([preferences addControlCenterWidgetBorder])
+				[[backgroundView layer] setBorderWidth: 3.0f];
+			
+			[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
+			^{
+				[backgroundView setBackgroundColor: [colorizer backgroundColor]];
+				if([preferences addControlCenterWidgetBorder])
+					[[backgroundView layer] setBorderColor: [colorizer primaryColor].CGColor];
 			}
+			completion: nil];
 		}
 	}
 
@@ -115,19 +102,13 @@ static void produceLightVibration()
 
 		if([preferences colorizeControlCenterMusicWidget] && [preferences addControlCenterWidgetBorder])
 		{
-			if([self backgroundView] && [[self backgroundView] isKindOfClass: %c(MediaControlsMaterialView)])
-			{
-				if([[[self backgroundView] subviews] count] > 0 && [[[self backgroundView] subviews][0] isKindOfClass: %c(MTMaterialView)])
-				{
-					MTMaterialView *materialView = (MTMaterialView*)[[self backgroundView] subviews][0];
-					
-					float cornerRadius = [[[[[[[materialView superview] superview] superview] superview] superview] layer] cornerRadius];
-					if(cornerRadius == 0)
-						cornerRadius = 19;
-					
-					[[materialView layer] setCornerRadius: cornerRadius];	
-				}
-			}
+			UIView *backgroundView = [[self nowPlayingHeaderView] superview];
+		
+			float cornerRadius = [[[[[[backgroundView superview] superview] superview] superview] layer] cornerRadius];
+			if(cornerRadius == 0)
+				cornerRadius = 19;
+			
+			[[backgroundView layer] setCornerRadius: cornerRadius];	
 		}
 	}
 
@@ -158,8 +139,7 @@ static void produceLightVibration()
 				if([controller isOnScreen])
 					[colorizer generateColorsForArtwork: [[self artworkView] image] withTitle: [[self primaryLabel] text]];
 				
-				if([[self primaryLabel] textColor] != [colorizer primaryColor]) 
-					[controller colorize];
+				[controller colorize];
 			}
 		}
 	}
@@ -199,8 +179,24 @@ static void produceLightVibration()
 					[caShapeSublayer setStrokeColor: [colorizer backgroundColor].CGColor];
 				}
 			}
-
 		}
+	}
+
+	%end
+
+	%hook MediaControlsTimeControl
+
+	%new
+	- (void)colorize
+	{
+		[[self elapsedTrack] setCustomBackgroundColor: [colorizer primaryColor]];
+		colorizeUIView([self elapsedTrack], [colorizer primaryColor], nil, [self visualStylingProvider]);
+		colorizeUIView([self remainingTrack], [colorizer secondaryColor], nil, [self visualStylingProvider]);
+		colorizeUIView([self knobView], [colorizer primaryColor], nil, nil);
+		colorizeUIView([self liveBackground], [colorizer secondaryColor], nil, nil);
+		colorizeUILabel([self elapsedTimeLabel], [colorizer primaryColor], [self visualStylingProvider]);
+		colorizeUILabel([self remainingTimeLabel], [colorizer primaryColor], [self visualStylingProvider]);
+		colorizeUILabel([self liveLabel], [colorizer secondaryColor], [self visualStylingProvider]);
 	}
 
 	%end
@@ -227,22 +223,6 @@ static void produceLightVibration()
 			colorizeUIView(thumbView, nil, [colorizer primaryColor], nil);
 			[[thumbView layer] setShadowColor: [colorizer primaryColor].CGColor];
 		}
-	}
-
-	%end
-
-	%hook MediaControlsTimeControl
-
-	%new
-	- (void)colorize
-	{
-		colorizeUIView([self elapsedTrack], [colorizer primaryColor], nil, [self visualStylingProvider]);
-		colorizeUIView([self remainingTrack], [colorizer secondaryColor], nil, [self visualStylingProvider]);
-		colorizeUIView([self knobView], [colorizer primaryColor], nil, nil);
-		colorizeUIView([self liveBackground], [colorizer secondaryColor], nil, nil);
-		colorizeUILabel([self elapsedTimeLabel], [colorizer primaryColor], [self visualStylingProvider]);
-		colorizeUILabel([self remainingTimeLabel], [colorizer primaryColor], [self visualStylingProvider]);
-		colorizeUILabel([self liveLabel], [colorizer secondaryColor], [self visualStylingProvider]);
 	}
 
 	%end
@@ -339,6 +319,23 @@ static void produceLightVibration()
 			[self _updateButtonVisualStyling: [self middleButton]];
 			[self _updateButtonVisualStyling: [self rightButton]];
 		}
+	}
+
+	%end
+
+	%hook LyricifyButton
+
+	- (id)initWithFrame: (CGRect)arg
+	{
+		lyricifyButton = %orig;
+		return lyricifyButton;
+	}
+
+	- (void)dealloc
+	{
+		if(lyricifyButton == self)
+			lyricifyButton = nil;
+		%orig;
 	}
 
 	%end

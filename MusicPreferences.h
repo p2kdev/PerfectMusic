@@ -33,6 +33,8 @@
 	BOOL __3AlbumsPerLine;
 	BOOL _hideQueueHUD;
 	BOOL _vibrateMusicApp;
+	BOOL _enableMusicAppCustomTint;
+	UIColor *_customMusicAppTintColor;
 }
 + (instancetype)sharedInstance;
 - (BOOL)enabled;
@@ -57,5 +59,7 @@
 - (BOOL)_3AlbumsPerLine;
 - (BOOL)hideQueueHUD;
 - (BOOL)vibrateMusicApp;
+- (BOOL)enableMusicAppCustomTint;
+- (UIColor*)customMusicAppTintColor;
 - (BOOL)isIpad;
 @end

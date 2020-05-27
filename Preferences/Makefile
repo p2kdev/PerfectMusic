@@ -7,6 +7,7 @@ BUNDLE_NAME = PerfectMusic13Prefs
 PerfectMusic13Prefs_FILES = PMSAppearanceSettings.m PMSRootHeaderView.mm PMSRootListController.xm
 PerfectMusic13Prefs_INSTALL_PATH = /Library/PreferenceBundles
 PerfectMusic13Prefs_FRAMEWORKS = UIKit
+PerfectMusic13Prefs_LIBRARIES += sparkcolourpicker
 PerfectMusic13Prefs_PRIVATE_FRAMEWORKS = Preferences
 PerfectMusic13Prefs_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 PerfectMusic13Prefs_EXTRA_FRAMEWORKS = Cephei CepheiPrefs

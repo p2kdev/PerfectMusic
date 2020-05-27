@@ -44,4 +44,23 @@
 	return [self backgroundColor] ? 0.2 + 0.3 * [[self backgroundColor] distanceFromColor: _oldBackgroundColor] : 0.0;
 }
 
+// - (void)resetColors
+// {
+// 	_title = nil;
+// 	_oldBackgroundColor = nil;
+// 	_colorArt = nil;
+// 	[[NSNotificationCenter defaultCenter] postNotificationName: @"MediaApplicationClosed" object: nil];
+// }
+
 @end
+
+// %hook SBMediaController
+
+// - (void)_setNowPlayingApplication: (id)arg1 
+// {
+// 	if(!arg1)
+// 		[[Colorizer sharedInstance] resetColors];
+// 	%orig;
+// }
+
+// %end
