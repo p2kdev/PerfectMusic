@@ -79,8 +79,10 @@
 - (void)_updateButtonLayout;
 - (void)updateButtonIcons: (BOOL)arg;
 - (void)setResponse: (MPCPlayerResponse*)arg;
+- (id)extraButtonsShown;
+- (void)setExtraButtonsShown: (id)arg;
 - (id)hasExtraButtons;
-- (void)setHasExtraButtons: (id)arg;
+- (void)setHasExtraButtons:(id)arg;
 - (void)layoutSubviews;
 - (void)_updateVisualStylingForButtons;
 -(MPCPlayerResponse *)response;
@@ -174,6 +176,7 @@
 - (UIView*)shadow;
 - (MTMaterialView*)artworkBackground;
 - (void)colorize;
+- (void)colorizeNextUp;
 - (void)observeValueForKeyPath: (NSString*)keyPath ofObject: (id)object change: (NSDictionary<NSKeyValueChangeKey, id>*)change context: (void*)context;
 @end
 
@@ -197,4 +200,10 @@
 - (UIView*)backgroundView;
 - (BOOL)isOnScreen;
 - (void)colorize;
+- (BOOL)isViewControllerOfLockScreenMusicWidget;
+- (BOOL)isViewControllerOfControlCenterMusicWidget;
+@end
+
+@interface NextUpViewController : UIViewController
+@property(nonatomic) _Bool controlCenter;
 @end

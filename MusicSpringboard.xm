@@ -16,16 +16,21 @@ int cornerMask = 0;
 static void colorizeUIView(UIView *view, UIColor *backgroundColor, UIColor *tintColor, MTVisualStylingProvider *visualStylingProvider)
 {
 	[[view layer] setFilters: nil];
-	if(backgroundColor) [view setBackgroundColor: backgroundColor];
-	if(tintColor) [view setTintColor: tintColor];
-	if(visualStylingProvider) [visualStylingProvider stopAutomaticallyUpdatingView: view];
+	if(backgroundColor)
+		[view setBackgroundColor: backgroundColor];
+	if(tintColor)
+		[view setTintColor: tintColor];
+	if(visualStylingProvider)
+		[visualStylingProvider stopAutomaticallyUpdatingView: view];
 }
 
 static void colorizeUILabel(UILabel *label, UIColor *textColor, MTVisualStylingProvider *visualStylingProvider)
 {
-	if(visualStylingProvider) [visualStylingProvider stopAutomaticallyUpdatingView: label];
+	if(visualStylingProvider)
+		[visualStylingProvider stopAutomaticallyUpdatingView: label];
 	[label mt_removeAllVisualStyling];
-	if(textColor) [label setTextColor: textColor];
+	if(textColor)
+		[label setTextColor: textColor];
 }
 
 static void produceLightVibration()
@@ -39,14 +44,35 @@ static void produceLightVibration()
 
 	%hook MRPlatterViewController
 
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+
+		if([colorizer primaryColor] && [self isViewControllerOfLockScreenMusicWidget])
+		{
+			UIView *backgroundView = [[[[[self view] superview] superview] superview] subviews][0];
+			if(![backgroundView backgroundColor])
+				[self colorize];
+		}
+
+		if([preferences colorizeControlCenterMusicWidget])
+		{
+			UIView *backgroundView = [[self nowPlayingHeaderView] superview];
+		
+			float cornerRadius = [[[[[[backgroundView superview] superview] superview] superview] layer] cornerRadius];
+			if(cornerRadius == 0)
+				cornerRadius = 19;
+			
+			[[backgroundView layer] setCornerRadius: cornerRadius];	
+		}
+	}
+
 	%new
 	- (void)colorize
 	{
 		MediaControlsHeaderView *nowPlayingHeaderView = [self nowPlayingHeaderView];
 
-		// NEED TO FIND A BETTER SOLUTION FOR CHECKING IF SELF IS THE CONTROLLER OF LOCK SCREEN'S WIDGET OR CONTROL CENTER'S WIDGET
-
-		if([preferences colorizeLockScreenMusicWidget] && [[[[nowPlayingHeaderView superview] superview] superview] isKindOfClass: %c(CSMediaControlsView)])
+		if([preferences colorizeLockScreenMusicWidget] && [self isViewControllerOfLockScreenMusicWidget])
 		{
 			[nowPlayingHeaderView colorize];
 			[[[[self parentContainerView] containerView] timeControl] colorize];
@@ -56,7 +82,7 @@ static void produceLightVibration()
 			if(lyricifyButton)
 				[lyricifyButton setTintColor: [colorizer primaryColor]];
 
-			UIView *backgroundView = [[[[[[nowPlayingHeaderView superview] superview] superview] superview] superview] subviews][0];
+			UIView *backgroundView = [[[[[self view] superview] superview] superview] subviews][0];
 
 			[[backgroundView layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
 			[[backgroundView layer] setMaskedCorners: cornerMask];
@@ -64,16 +90,16 @@ static void produceLightVibration()
 			if([preferences addLockScreenMusicWidgetBorder])
 				[[backgroundView layer] setBorderWidth: [preferences lockScreenMusicWidgetBorderWidth]];
 
-			[backgroundView setCustomBackgroundColor: [colorizer backgroundColor]];
+			[backgroundView setCustomBackgroundColor: [[colorizer backgroundColor] colorWithAlphaComponent: [preferences lockScreenMusicWidgetBackgroundColorAlpha]]];
 			[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
 			^{
-				[backgroundView setBackgroundColor: [colorizer backgroundColor]];
+				[backgroundView setBackgroundColor: [[colorizer backgroundColor] colorWithAlphaComponent: [preferences lockScreenMusicWidgetBackgroundColorAlpha]]];
 				if([preferences addLockScreenMusicWidgetBorder])
-					[[backgroundView layer] setBorderColor: [colorizer primaryColor].CGColor];
+					[[backgroundView layer] setBorderColor: [[colorizer primaryColor] colorWithAlphaComponent: [preferences lockScreenMusicWidgetBorderColorAlpha]].CGColor];
 			}
 			completion: nil];
 		}
-		else if([preferences colorizeControlCenterMusicWidget] && [[[[[[nowPlayingHeaderView superview] superview] superview] superview] superview] isKindOfClass: %c(CCUIContentModuleContentContainerView)])
+		else if([preferences colorizeControlCenterMusicWidget] && [self isViewControllerOfControlCenterMusicWidget])
 		{
 			[nowPlayingHeaderView colorize];
 			[[self routingCornerView] colorize];
@@ -88,28 +114,24 @@ static void produceLightVibration()
 			
 			[UIView animateWithDuration: [colorizer backgroundColorChangeDuration] animations:
 			^{
-				[backgroundView setBackgroundColor: [colorizer backgroundColor]];
+				[backgroundView setBackgroundColor: [[colorizer backgroundColor] colorWithAlphaComponent: [preferences controlCenterMusicWidgetBackgroundColorAlpha]]];
 				if([preferences addControlCenterWidgetBorder])
-					[[backgroundView layer] setBorderColor: [colorizer primaryColor].CGColor];
+					[[backgroundView layer] setBorderColor: [[colorizer primaryColor] colorWithAlphaComponent: [preferences controlCenterMusicWidgetBorderColorAlpha]].CGColor];
 			}
 			completion: nil];
 		}
 	}
 
-	- (void)viewDidLayoutSubviews
+	%new
+	- (BOOL)isViewControllerOfLockScreenMusicWidget
 	{
-		%orig;
+		return [[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)];
+	}
 
-		if([preferences colorizeControlCenterMusicWidget] && [preferences addControlCenterWidgetBorder])
-		{
-			UIView *backgroundView = [[self nowPlayingHeaderView] superview];
-		
-			float cornerRadius = [[[[[[backgroundView superview] superview] superview] superview] layer] cornerRadius];
-			if(cornerRadius == 0)
-				cornerRadius = 19;
-			
-			[[backgroundView layer] setCornerRadius: cornerRadius];	
-		}
+	%new
+	- (BOOL)isViewControllerOfControlCenterMusicWidget
+	{
+		return [[self parentViewController] isKindOfClass: %c(MediaControlsEndpointsViewController)];
 	}
 
 	%end
@@ -120,7 +142,7 @@ static void produceLightVibration()
 	{
 		self = %orig;
 		if([self isKindOfClass: %c(NextUpMediaHeaderView)])
-			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(colorize) name: @"MusicArtworkChanged" object: nil];
+			[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(colorizeNextUp) name: @"MusicArtworkChanged" object: nil];
 		else
 			[[self artworkView] addObserver: self forKeyPath: @"image" options: NSKeyValueObservingOptionNew context: nil];
 		return self;
@@ -145,22 +167,24 @@ static void produceLightVibration()
 	}
 
 	%new
-	- (void)colorize
+	- (void)colorizeNextUp
 	{
-		colorizeUILabel([[self routeLabel] titleLabel], [colorizer secondaryColor], [self visualStylingProvider]);
-		
-		[[self primaryLabel] setCustomTextColor: [colorizer primaryColor]];
-		colorizeUILabel([self primaryLabel], [colorizer primaryColor], [self visualStylingProvider]);
-		
-		[[self secondaryLabel] setCustomTextColor: [colorizer secondaryColor]];
-		colorizeUILabel([self secondaryLabel], [colorizer secondaryColor], [self visualStylingProvider]);
-		
-		[[self shadow] setHidden: YES];
-		[[self artworkBackground] setHidden: YES];
-		
-		if(![self isKindOfClass: %c(NextUpMediaHeaderView)]) [[self routingButton] colorize];
-		else
+		BOOL isControlCenter = [((NextUpViewController*)[self _viewControllerForAncestor]) controlCenter];
+
+		if(([preferences colorizeLockScreenMusicWidget] && !isControlCenter)
+		|| ([preferences colorizeControlCenterMusicWidget] && isControlCenter))
 		{
+			colorizeUILabel([[self routeLabel] titleLabel], [colorizer secondaryColor], [self visualStylingProvider]);
+		
+			[[self primaryLabel] setCustomTextColor: [colorizer primaryColor]];
+			colorizeUILabel([self primaryLabel], [colorizer primaryColor], [self visualStylingProvider]);
+			
+			[[self secondaryLabel] setCustomTextColor: [colorizer secondaryColor]];
+			colorizeUILabel([self secondaryLabel], [colorizer secondaryColor], [self visualStylingProvider]);
+			
+			[[self shadow] setHidden: YES];
+			[[self artworkBackground] setHidden: YES];
+
 			for(UIView *view in [[self superview] subviews])
 			{
 				if([view isKindOfClass: %c(UILabel)]) 
@@ -170,16 +194,37 @@ static void produceLightVibration()
 				}
 			}
 			[[self routingButton] setBackgroundColor: [colorizer primaryColor]];
+
+			UIColor *bgColor = [[colorizer backgroundColor] colorWithAlphaComponent: 
+				isControlCenter ? [preferences controlCenterMusicWidgetBackgroundColorAlpha] : [preferences lockScreenMusicWidgetBackgroundColorAlpha]];
+
 			for(CALayer *sublayer in [[[self routingButton] layer] sublayers])
 			{
 				if([sublayer isKindOfClass: %c(CAShapeLayer)])
 				{
 					CAShapeLayer *caShapeSublayer = (CAShapeLayer*)sublayer;
-					[caShapeSublayer setCustomStrokeColor: [colorizer backgroundColor]];
-					[caShapeSublayer setStrokeColor: [colorizer backgroundColor].CGColor];
+					[caShapeSublayer setCustomStrokeColor: bgColor];
+					[caShapeSublayer setStrokeColor: bgColor.CGColor];
 				}
 			}
 		}
+	}
+
+	%new
+	- (void)colorize
+	{
+		colorizeUILabel([[self routeLabel] titleLabel], [colorizer secondaryColor], [self visualStylingProvider]);
+	
+		[[self primaryLabel] setCustomTextColor: [colorizer primaryColor]];
+		colorizeUILabel([self primaryLabel], [colorizer primaryColor], [self visualStylingProvider]);
+		
+		[[self secondaryLabel] setCustomTextColor: [colorizer secondaryColor]];
+		colorizeUILabel([self secondaryLabel], [colorizer secondaryColor], [self visualStylingProvider]);
+		
+		[[self shadow] setHidden: YES];
+		[[self artworkBackground] setHidden: YES];
+
+		[[self routingButton] colorize];
 	}
 
 	%end
@@ -263,7 +308,7 @@ static void produceLightVibration()
 			{
 				for(CALayer *sublayer3 in [sublayer2 sublayers])
 				{
-					[(CAShapeLayer*)sublayer3 setFillColor: [colorizer backgroundColor].CGColor];
+					[(CAShapeLayer*)sublayer3 setFillColor: [[colorizer backgroundColor] colorWithAlphaComponent: [preferences lockScreenMusicWidgetBackgroundColorAlpha]].CGColor];
 					[sublayer3 setOpacity: 1];
 					[sublayer3 setCompositingFilter: nil];
 				}
@@ -290,7 +335,10 @@ static void produceLightVibration()
 
 	- (void)_updateButtonVisualStyling: (id)arg1
 	{
-		if([colorizer primaryColor]) [self colorize];
+		if([colorizer primaryColor] 
+		&& (([preferences colorizeLockScreenMusicWidget] && [[self _viewControllerForAncestor] isViewControllerOfLockScreenMusicWidget])
+		|| ([preferences colorizeControlCenterMusicWidget] && [[self _viewControllerForAncestor] isViewControllerOfControlCenterMusicWidget])))
+			[self colorize];
 		else 
 			%orig;
 	}
@@ -298,7 +346,9 @@ static void produceLightVibration()
 	%new
 	- (void)colorize
 	{
-		if([colorizer primaryColor])
+		if([colorizer primaryColor] 
+		&& (([preferences colorizeLockScreenMusicWidget] && [[self _viewControllerForAncestor] isViewControllerOfLockScreenMusicWidget])
+		|| ([preferences colorizeControlCenterMusicWidget] && [[self _viewControllerForAncestor] isViewControllerOfControlCenterMusicWidget])))
 		{
 			[[[self leftButton] imageView] setCustomTintColor: [colorizer primaryColor]];
 			colorizeUIView([[self leftButton] imageView], nil, [colorizer primaryColor], nil);
@@ -307,7 +357,7 @@ static void produceLightVibration()
 			[[[self rightButton] imageView] setCustomTintColor: [colorizer primaryColor]];
 			colorizeUIView([[self rightButton] imageView], nil, [colorizer primaryColor], nil);
 			
-			if([preferences showExtraButtons])
+			if([self respondsToSelector: @selector(hasExtraButtons)] && [[self hasExtraButtons] isEqual: @YES])
 			{
 				colorizeUIView([[self shuffleButton] imageView], nil, [colorizer primaryColor], nil);
 				colorizeUIView([[self repeatButton] imageView], nil, [colorizer primaryColor], nil);

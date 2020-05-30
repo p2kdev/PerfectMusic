@@ -31,17 +31,25 @@
 		@"showNotification": @NO,
 
 		//Springboard
-		@"showExtraButtons": @NO,
+		@"addExtraButtonsToLockScreen": @NO,
+		@"addExtraButtonsToControlCenter": @NO,
+
 		@"colorizeLockScreenMusicWidget": @NO,
+		@"lockScreenMusicWidgetBackgroundColorAlpha": @1.0,
 		@"lockScreenMusicWidgetCornerRadius": @13,
 		@"disableTopLeftCornerRadius": @NO,
 		@"disableTopRightCornerRadius": @NO,
 		@"disableBottomLeftCornerRadius": @NO,
 		@"disableBottomRightCornerRadius": @NO,
 		@"addLockScreenMusicWidgetBorder": @NO,
+		@"lockScreenMusicWidgetBorderColorAlpha": @1.0,
 		@"lockScreenMusicWidgetBorderWidth": @3,
+
 		@"colorizeControlCenterMusicWidget": @NO,
+		@"controlCenterMusicWidgetBackgroundColorAlpha": @1.0,
 		@"addControlCenterWidgetBorder": @NO,
+		@"controlCenterMusicWidgetBorderColorAlpha": @1.0,
+
 		@"vibrateMusicWidget": @NO,
 
 		//MusicApp
@@ -60,17 +68,25 @@
 	_swapVolumeButtonsOnLandscapeLeft = [_preferences boolForKey: @"swapVolumeButtonsOnLandscapeLeft"];
 	_showNotification = [_preferences boolForKey: @"showNotification"];
 
-	_showExtraButtons = [_preferences boolForKey: @"showExtraButtons"];
+	_addExtraButtonsToLockScreen = [_preferences boolForKey: @"addExtraButtonsToLockScreen"];
+	_addExtraButtonsToControlCenter = [_preferences boolForKey: @"addExtraButtonsToControlCenter"];
+
 	_colorizeLockScreenMusicWidget = [_preferences boolForKey: @"colorizeLockScreenMusicWidget"];
+	_lockScreenMusicWidgetBackgroundColorAlpha = [_preferences doubleForKey: @"lockScreenMusicWidgetBackgroundColorAlpha"];
 	_lockScreenMusicWidgetCornerRadius = [_preferences integerForKey: @"lockScreenMusicWidgetCornerRadius"];
 	_disableTopLeftCornerRadius = [_preferences boolForKey: @"disableTopLeftCornerRadius"];
 	_disableTopRightCornerRadius = [_preferences boolForKey: @"disableTopRightCornerRadius"];
 	_disableBottomLeftCornerRadius = [_preferences boolForKey: @"disableBottomLeftCornerRadius"];
 	_disableBottomRightCornerRadius = [_preferences boolForKey: @"disableBottomRightCornerRadius"];
 	_addLockScreenMusicWidgetBorder = [_preferences boolForKey: @"addLockScreenMusicWidgetBorder"];
+	_lockScreenMusicWidgetBorderColorAlpha = [_preferences doubleForKey: @"lockScreenMusicWidgetBorderColorAlpha"];
 	_lockScreenMusicWidgetBorderWidth = [_preferences integerForKey: @"lockScreenMusicWidgetBorderWidth"];
+
 	_colorizeControlCenterMusicWidget = [_preferences boolForKey: @"colorizeControlCenterMusicWidget"];
+	_controlCenterMusicWidgetBackgroundColorAlpha = [_preferences doubleForKey: @"controlCenterMusicWidgetBackgroundColorAlpha"];
 	_addControlCenterWidgetBorder = [_preferences boolForKey: @"addControlCenterWidgetBorder"];
+	_controlCenterMusicWidgetBorderColorAlpha = [_preferences doubleForKey: @"controlCenterMusicWidgetBorderColorAlpha"];
+	
 	_vibrateMusicWidget = [_preferences boolForKey: @"vibrateMusicWidget"];
 
 	_colorizeMusicApp = [_preferences boolForKey: @"colorizeMusicApp"];
@@ -87,126 +103,6 @@
 	}
 
 	return self;
-}
-
-- (BOOL)enabled
-{
-	return _enabled;
-}
-
-- (BOOL)enabledMediaControlWithVolumeButtons
-{
-	return _enabledMediaControlWithVolumeButtons;
-}
-
-- (BOOL)swapVolumeButtonsOnLandscapeLeft
-{
-	return _swapVolumeButtonsOnLandscapeLeft;
-}
-
-- (BOOL)showNotification
-{
-	return _showNotification;
-}
-
-- (BOOL)showExtraButtons
-{
-	return _showExtraButtons;
-}
-
-- (BOOL)colorizeLockScreenMusicWidget
-{
-	return _colorizeLockScreenMusicWidget;
-}
-
-- (NSInteger)lockScreenMusicWidgetCornerRadius
-{
-	return _lockScreenMusicWidgetCornerRadius;
-}
-
-- (BOOL)disableTopLeftCornerRadius
-{
-	return _disableTopLeftCornerRadius;
-}
-
-- (BOOL)disableTopRightCornerRadius
-{
-	return _disableTopRightCornerRadius;
-}
-
-- (BOOL)disableBottomLeftCornerRadius
-{
-	return _disableBottomLeftCornerRadius;
-}
-
-- (BOOL)disableBottomRightCornerRadius
-{
-	return _disableBottomRightCornerRadius;
-}
-
-- (BOOL)addLockScreenMusicWidgetBorder
-{
-	return _addLockScreenMusicWidgetBorder;
-}
-
-- (NSInteger )lockScreenMusicWidgetBorderWidth
-{
-	return _lockScreenMusicWidgetBorderWidth;
-}
-
-- (BOOL)colorizeControlCenterMusicWidget
-{
-	return _colorizeControlCenterMusicWidget;
-}
-
-- (BOOL)addControlCenterWidgetBorder
-{
-	return _addControlCenterWidgetBorder;
-}
-
-- (BOOL)vibrateMusicWidget
-{
-	return _vibrateMusicWidget;
-}
-
-- (BOOL)colorizeMusicApp
-{
-	return _colorizeMusicApp;
-}
-
-- (BOOL)addMusicAppBorder
-{
-	return _addMusicAppBorder;
-}
-
-- (NSInteger )musicAppBorderWidth
-{
-	return _musicAppBorderWidth;
-}
-
-- (BOOL)_3AlbumsPerLine
-{
-	return __3AlbumsPerLine;
-}
-
-- (BOOL)hideQueueHUD
-{
-	return _hideQueueHUD;
-}
-
-- (BOOL)vibrateMusicApp
-{
-	return _vibrateMusicApp;
-}
-
-- (BOOL)enableMusicAppCustomTint
-{
-	return _enableMusicAppCustomTint;
-}
-
-- (UIColor*)customMusicAppTintColor
-{
-	return _customMusicAppTintColor;
 }
 
 - (BOOL)isIpad

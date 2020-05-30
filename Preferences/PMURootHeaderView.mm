@@ -1,14 +1,14 @@
-#import "PMSRootListController.h"
+#import "PMURootListController.h"
 
 static float headH;
 
-@implementation PMSRootHeaderView
+@implementation PMURootHeaderView
 
 - (instancetype)initWithSpecifier: (PSSpecifier*)specifier
 {
 	self = [super init];
 
-	UIImage* headerImage = [UIImage imageNamed: @"PMSHeader" inBundle: [NSBundle bundleForClass: [self class]] compatibleWithTraitCollection: nil];
+	UIImage* headerImage = [UIImage imageNamed: @"PMUHeader" inBundle: [NSBundle bundleForClass: [self class]] compatibleWithTraitCollection: nil];
 	_aspectRatio = headerImage.size.width / headerImage.size.height;
 	_headerImageView = [[UIImageView alloc] initWithImage: headerImage];
 	[self addSubview: _headerImageView];

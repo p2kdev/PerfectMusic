@@ -4,7 +4,7 @@ TARGET = iphone:clang:11.2:11.2
 include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = PerfectMusic13Prefs
-PerfectMusic13Prefs_FILES = PMSAppearanceSettings.m PMSRootHeaderView.mm PMSRootListController.xm
+PerfectMusic13Prefs_FILES = PMUAppearanceSettings.m PMURootHeaderView.mm PMURootListController.xm
 PerfectMusic13Prefs_INSTALL_PATH = /Library/PreferenceBundles
 PerfectMusic13Prefs_FRAMEWORKS = UIKit
 PerfectMusic13Prefs_LIBRARIES += sparkcolourpicker

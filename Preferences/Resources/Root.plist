@@ -8,14 +8,14 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>headerCellClass</key>
-			<string>PMSRootHeaderView</string>
+			<string>PMURootHeaderView</string>
 			<key>icon</key>
-			<string>PMSHeader.png</string>
+			<string>PMUHeader.png</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -29,10 +29,16 @@
 			<string>Enabled</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>VOLUME BUTTONS</string>
+			<string>--- VOLUME BUTTONS ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 			<key>footerText</key>
 			<string>'CONTROL MEDIA' OPTION:
 PRESS BOTH VOLUME UP + VOLUME DOWN TO PLAY / PAUSE MEDIA.
@@ -40,7 +46,7 @@ HOLD VOLUME UP FOR NEXT SONG.
 HOLD VOLUME DOWN FOR PREVIOUS SONG.
 'SWAP ON LANDSCAPE LEFT' OPTION SWAPS VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT.
 </string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -66,11 +72,17 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>Swap On Landscape Left</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MEDIA NOTIFICATION</string>
-        </dict>
+			<string>--- MEDIA NOTIFICATION ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -84,13 +96,17 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>Show Notification On New Song</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>SHUFFLE - REPEAT BUTTONS</string>
-			<key>footerText</key>
-			<string>ADDS SHUFFLE AND REPEAT BUTTONS TO THE MUSIC WIDGET ON LOCK SCREEN AND CONTROL CENTER.</string>
-        </dict>
+			<string>--- SHUFFLE - REPEAT BUTTONS ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -99,16 +115,36 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
-			<string>showExtraButtons</string>
+			<string>addExtraButtonsToLockScreen</string>
 			<key>label</key>
-			<string>Add Shuffle And Rpeat Buttons</string>
+			<string>Add To Lock Screen</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>addExtraButtonsToControlCenter</string>
+			<key>label</key>
+			<string>Add To Control Center</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>LOCK SCREEN MUSIC WIDGET - COLORS</string>
-        </dict>
+			<string>--- LOCK SCREEN MUSIC WIDGET ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>COLORS</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -131,14 +167,66 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>key</key>
 			<string>addLockScreenMusicWidgetBorder</string>
 			<key>label</key>
-			<string>Add Colorized Border</string>
+			<string>Add Border</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>LOCK SCREEN MUSIC WIDGET - BORDER WIDTH</string>
-        </dict>
+			<string>BACKGROUND COLOR ALPHA</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetBackgroundColorAlpha</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>10</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>1</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>BORDER COLOR ALPHA</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetBorderColorAlpha</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>10</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>1</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>BORDER WIDTH</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSliderCell</string>
@@ -160,11 +248,11 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<true/>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>LOCK SCREEN WIDGET CORNER RADIUS</string>
-        </dict>
+			<string>CORNER RADIUS</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSliderCell</string>
@@ -234,11 +322,19 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>No Bottom Right Round Corner</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>CONTROL CENTER MUSIC WIDGET - COLORS</string>
-        </dict>
+			<string>--- CONTROL CENTER MUSIC WIDGET ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>COLORS</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -261,16 +357,74 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>key</key>
 			<string>addControlCenterWidgetBorder</string>
 			<key>label</key>
-			<string>Add Colorized Border</string>
+			<string>Add Border</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MUSIC WIDGET - OTHER OPTIONS</string>
+			<string>BACKGROUND COLOR ALPHA</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>controlCenterMusicWidgetBackgroundColorAlpha</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>10</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>1</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>BORDER COLOR ALPHA</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>controlCenterMusicWidgetBorderColorAlpha</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>10</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>1</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>--- MUSIC WIDGET - OTHER OPTIONS ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 			<key>footerText</key>
 			<string>VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -284,13 +438,19 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>Add Vibrations To UI Elements</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MUSIC APP - COLORS</string>
-			<key>footerText</key>
-			<string></string>
-        </dict>
+			<string>--- MUSIC APP ---</string>
+			<key>alignment</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>COLORS</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -316,10 +476,10 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>Add Colorized Border</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MUSIC APP - BORDER WIDTH</string>
+			<string>BORDER WIDTH</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -342,15 +502,15 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<true/>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>MUSIC APP - OTHER OPTIONS</string>
+			<string>OTHER OPTIONS</string>
 			<key>footerText</key>
 			<string>'3 ALBUMS IN RECENTLY ADDED' SHOWS 3 ALBUMS PER LINE IN RECENTLY ADDED ALBUMS SECTION. IPHONE ONLY.
 'HIDE QUEUE HUD' HIDES THE ANNOYING POPUP THAT SHOWS UP WHEN YOU ADD A SONG TO THE QUEUE.
 VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -421,11 +581,11 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<string>customMusicAppTintColor</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
 			<string>WHEN RESETING, RESPRING WILL OCCUR</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSButtonCell</string>
@@ -435,11 +595,11 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<string>Reset All Settings</string>
 		</dict>
 		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>ABOUT THIS TWEAK</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
@@ -451,45 +611,45 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
    	 		<string>https://github.com/johnzaro/PerfectMusic13</string>
 		</dict>
  		<dict>
-        	<key>cell</key>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>ABOUT ME</string>
 			<key>footerText</key>
 			<string>© 2020 John Zarogiannis (johnzaro)</string>
-        </dict>
+		</dict>
 		<dict>
 			<key>big</key>
-    		<true/>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
+			<true/>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
 			<key>height</key>
-    		<integer>56</integer>
-            <key>label</key>
-            <string>John Zarogiannis</string>
-            <key>user</key>
-            <string>johnzaro</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>Email Me</string>
-            <key>action</key>
-            <string>email</string>
-            <key>icon</key>
-            <string>email.png</string>
-        </dict>
+			<integer>56</integer>
+			<key>label</key>
+			<string>John Zarogiannis</string>
+			<key>user</key>
+			<string>johnzaro</string>
+		</dict>
 		<dict>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>Check me on Reddit</string>
-            <key>action</key>
-            <string>reddit</string>
-            <key>icon</key>
-            <string>reddit.png</string>
-        </dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Email Me</string>
+			<key>action</key>
+			<string>email</string>
+			<key>icon</key>
+			<string>email.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Check me on Reddit</string>
+			<key>action</key>
+			<string>reddit</string>
+			<key>icon</key>
+			<string>reddit.png</string>
+		</dict>
 		<dict>
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
@@ -499,7 +659,7 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<string>donate.png</string>
 			<key>url</key>
    	 		<string>https://paypal.me/JohnZarogiannis</string>
-        </dict>
+		</dict>
 	</array>
 	<key>title</key>
 	<string>perfectappswitcher13</string>

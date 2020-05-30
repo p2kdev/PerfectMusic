@@ -1,7 +1,10 @@
 #import "MusicSpringboard.h"
+#import "MusicPreferences.h"
 
 static NSMutableArray *shuffleImages;
 static NSMutableArray *repeatImages;
+
+static MusicPreferences *preferences;
 
 %hook MediaControlsTransportStackView
 
@@ -45,21 +48,77 @@ static NSMutableArray *repeatImages;
 {
 	MPCPlayerResponse *oldResponse = [self response];
 	%orig;
-	if(oldResponse != arg)
+	if([[self hasExtraButtons] isEqual: @YES] && oldResponse != arg)
 		[self updateButtonIcons: YES];
 }
 
 - (void)_updateVisualStylingForButtons
 {
 	%orig;
-	[self _updateButtonVisualStyling: [self shuffleButton]];
-	[self _updateButtonVisualStyling: [self repeatButton]];
+	if([[self hasExtraButtons] isEqual: @YES])
+	{
+		[self _updateButtonVisualStyling: [self shuffleButton]];
+		[self _updateButtonVisualStyling: [self repeatButton]];
+	}
 }
 
 - (void)_updateButtonLayout
 {
 	%orig;
-	[self updateButtonIcons: NO];
+
+	if(![[self hasExtraButtons] isEqual: @YES] && ![[self hasExtraButtons] isEqual: @NO])
+	{
+		UIViewController *controller = [[self  _viewControllerForAncestor] parentViewController];
+		if([controller isKindOfClass: %c(CSMediaControlsViewController)] || [controller isKindOfClass: %c(MediaControlsEndpointsViewController)])
+		{
+			if([preferences addExtraButtonsToLockScreen] && [controller isKindOfClass: %c(CSMediaControlsViewController)]
+			|| [preferences addExtraButtonsToControlCenter] && [controller isKindOfClass: %c(MediaControlsEndpointsViewController)])
+				[self setHasExtraButtons: @YES];
+			else
+				[self setHasExtraButtons: @NO];
+		}
+	}
+
+	if([[self hasExtraButtons] isEqual: @YES])
+		[self updateButtonIcons: NO];
+}
+
+- (void)layoutSubviews
+{
+	%orig;
+
+	if([[self hasExtraButtons] isEqual: @YES])
+	{
+		MediaControlsTransportButton *shuffleButton = [self shuffleButton];
+		MediaControlsTransportButton *repeatButton = [self repeatButton];
+		if([[self extraButtonsShown] isEqual: @YES])
+		{
+			MediaControlsTransportButton *leftButton = [self leftButton];
+			MediaControlsTransportButton *middleButton = [self middleButton];
+			MediaControlsTransportButton *rightButton = [self rightButton];
+
+			CGRect originalFrame = [leftButton frame];
+			float y = originalFrame.origin.y;
+			float width = originalFrame.size.width;
+			float height = originalFrame.size.height;
+			float fullWidth = [self frame].size.width;
+			float space = (fullWidth - 5 * width) / 6;
+
+			[shuffleButton setFrame: CGRectMake(space, y, width, height)];
+			[leftButton setFrame: CGRectMake(space * 2 + width, y, width, height)];
+			[middleButton setFrame: CGRectMake(space * 3 + width * 2, y, width, height)];
+			[rightButton setFrame: CGRectMake(space * 4 + width * 3, y, width, height)];
+			[repeatButton setFrame: CGRectMake(space * 5 + width * 4, y, width, height)];
+
+			[shuffleButton setHidden: NO];
+			[repeatButton setHidden: NO];
+		}
+		else
+		{
+			[shuffleButton setHidden: YES];
+			[repeatButton setHidden: YES];
+		}
+	}
 }
 
 %new
@@ -105,45 +164,10 @@ static NSMutableArray *repeatImages;
 		[[self repeatButton] setImage: repeatImages[MIN(2, currentRepeatType)] forState: UIControlStateNormal];
 	}
 
-	if(shouldShow != [[self hasExtraButtons] isEqual: @YES])
+	if(shouldShow != [[self extraButtonsShown] isEqual: @YES])
 	{
-		[self setHasExtraButtons: shouldShow ? @YES : @NO];
+		[self setExtraButtonsShown: shouldShow ? @YES : @NO];
 		[self setNeedsLayout];
-	}
-}
-
-- (void)layoutSubviews
-{
-	%orig;
-
-	MediaControlsTransportButton *shuffleButton = [self shuffleButton];
-	MediaControlsTransportButton *repeatButton = [self repeatButton];
-	if([[self hasExtraButtons] isEqual: @YES])
-	{
-		MediaControlsTransportButton *leftButton = [self leftButton];
-		MediaControlsTransportButton *middleButton = [self middleButton];
-		MediaControlsTransportButton *rightButton = [self rightButton];
-
-		CGRect originalFrame = [leftButton frame];
-		float y = originalFrame.origin.y;
-		float width = originalFrame.size.width;
-		float height = originalFrame.size.height;
-		float fullWidth = [self frame].size.width;
-		float space = (fullWidth - 5 * width) / 6;
-
-		[shuffleButton setFrame: CGRectMake(space, y, width, height)];
-		[leftButton setFrame: CGRectMake(space * 2 + width, y, width, height)];
-		[middleButton setFrame: CGRectMake(space * 3 + width * 2, y, width, height)];
-		[rightButton setFrame: CGRectMake(space * 4 + width * 3, y, width, height)];
-		[repeatButton setFrame: CGRectMake(space * 5 + width * 4, y, width, height)];
-
-		[shuffleButton setHidden: NO];
-		[repeatButton setHidden: NO];
-	}
-	else
-	{
-		[shuffleButton setHidden: YES];
-		[repeatButton setHidden: YES];
 	}
 }
 
@@ -172,6 +196,18 @@ static NSMutableArray *repeatImages;
 }
 
 %new
+- (id)extraButtonsShown
+{
+	return (id)objc_getAssociatedObject(self, @selector(extraButtonsShown));
+}
+
+%new
+- (void)setExtraButtonsShown: (id)arg
+{
+	objc_setAssociatedObject(self, @selector(extraButtonsShown), arg, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+%new
 - (id)hasExtraButtons
 {
 	return (id)objc_getAssociatedObject(self, @selector(hasExtraButtons));
@@ -187,5 +223,7 @@ static NSMutableArray *repeatImages;
 
 void initExtraButtons()
 {
+	preferences = [MusicPreferences sharedInstance];
+
 	%init;
 }

@@ -25,7 +25,7 @@ static MusicPreferences *preferences;
             {
                 if([preferences showNotification])
                     initMediaNotification();
-                if([preferences showExtraButtons])
+                if([preferences addExtraButtonsToLockScreen] || [preferences addExtraButtonsToControlCenter])
                     initExtraButtons();
                 initVolumeControl();
                 initMusicWidgetHelper();

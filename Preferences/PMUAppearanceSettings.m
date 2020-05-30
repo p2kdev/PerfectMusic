@@ -1,6 +1,6 @@
-#import "PMSRootListController.h"
+#import "PMURootListController.h"
 
-@implementation PMSAppearanceSettings
+@implementation PMUAppearanceSettings
 
 - (UIColor*)tintColor
 {

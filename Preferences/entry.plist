@@ -9,9 +9,9 @@
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>PMSRootListController</string>
+		<string>PMURootListController</string>
 		<key>icon</key>
-		<string>PMSRootIcon.png</string>
+		<string>PMURootIcon.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>

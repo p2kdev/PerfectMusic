@@ -5,10 +5,10 @@
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
 
-@interface PMSAppearanceSettings: HBAppearanceSettings
+@interface PMUAppearanceSettings: HBAppearanceSettings
 @end
 
-@interface PMSRootHeaderView: UITableViewHeaderFooterView<PSHeaderFooterView>
+@interface PMURootHeaderView: UITableViewHeaderFooterView<PSHeaderFooterView>
 {
     UIImageView *_headerImageView;
     CGFloat _aspectRatio;
@@ -16,7 +16,7 @@
 + (CGFloat)headerH;
 @end
 
-@interface PMSRootListController: HBRootListController
+@interface PMURootListController: HBRootListController
 {
     UITableView *_table;
 }

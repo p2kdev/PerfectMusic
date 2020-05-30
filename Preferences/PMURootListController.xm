@@ -1,8 +1,8 @@
-#include "PMSRootListController.h"
+#include "PMURootListController.h"
 #import "SparkColourPickerView.h"
 #import "spawn.h"
 
-@implementation PMSRootListController
+@implementation PMURootListController
 
 - (instancetype)init
 {
@@ -10,7 +10,7 @@
 
     if (self)
 	{
-        PMSAppearanceSettings *appearanceSettings = [[PMSAppearanceSettings alloc] init];
+        PMUAppearanceSettings *appearanceSettings = [[PMUAppearanceSettings alloc] init];
         self.hb_appearanceSettings = appearanceSettings;
         self.respringButton = [[UIBarButtonItem alloc] initWithTitle: @"Respring" style: UIBarButtonItemStylePlain target: self action: @selector(respring)];
         self.respringButton.tintColor = [UIColor blackColor];
@@ -64,7 +64,7 @@
 
 - (void)scrollViewDidScroll: (UIScrollView*)scrollView
 {
-    if (scrollView.contentOffset.y > [PMSRootHeaderView headerH] / 2.0) [UIView animateWithDuration: 0.2 animations: ^{ self.titleLabel.alpha = 1.0; }];
+    if (scrollView.contentOffset.y > [PMURootHeaderView headerH] / 2.0) [UIView animateWithDuration: 0.2 animations: ^{ self.titleLabel.alpha = 1.0; }];
 	else [UIView animateWithDuration:0.2 animations: ^{ self.titleLabel.alpha = 0.0; }];
 }
 
