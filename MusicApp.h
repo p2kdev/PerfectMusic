@@ -100,6 +100,10 @@
 - (void)colorize;
 @end
 
+@interface _TtC16MusicApplication24MiniPlayerViewController: UIViewController
+@property(nonatomic, retain) UILabel *nowPlayingItemTitleLabel;
+@end
+
 @interface MusicNowPlayingControlsViewController: UIViewController
 @property(nonatomic, retain) MPRouteLabel *routeLabel;
 @property(nonatomic, retain) MPButton *routeButton;
@@ -162,4 +166,8 @@
 
 @interface UIScreen ()
 - (CGRect)_referenceBounds;
+@end
+
+@interface UIAlertAction ()
+@property(nonatomic, copy) void (^handler)(UIAlertAction *action);
 @end

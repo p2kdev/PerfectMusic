@@ -109,7 +109,7 @@ static NSString* getDeviceModel()
 					if([[self _viewControllerForAncestor] isKindOfClass: %c(MusicNowPlayingControlsViewController)])
 						title = [[(MusicNowPlayingControlsViewController*)[self _viewControllerForAncestor] titleLabel] text];
 					else
-						title = [[(MiniPlayerViewController*)[self _viewControllerForAncestor] nowPlayingItemTitleLabel] text];
+						title = [[(_TtC16MusicApplication24MiniPlayerViewController*)[self _viewControllerForAncestor] nowPlayingItemTitleLabel] text];
 
 					if([title hasSuffix: @" 🅴"])
 						title = [title substringToIndex: ([title length] - 3)];
@@ -687,6 +687,36 @@ static NSString* getDeviceModel()
 
 %end
 
+// -------------------------------------- ALWAYS KEEP OR CLEAR QUEUE --------------------------------------
+
+%group hideKeepOrClearAlertGroup
+
+	// Original tweak by @arandomdev: https://github.com/arandomdev/AlwaysClear
+
+	%hook MusicApplicationTabController
+
+	- (void)presentViewController: (UIViewController*)viewControllerToPresent animated: (BOOL)flag completion: (void (^)(void))completion
+	{
+		if([viewControllerToPresent isKindOfClass: [UIAlertController class]])
+		{
+			UIAlertController *alertController = (UIAlertController*)viewControllerToPresent;
+			if([[alertController message] containsString: @"playing"] && [[alertController message] containsString: @"queue"])
+			{
+				UIAlertAction *clearAction = alertController.actions[[preferences keepOrClearAlertAction]];
+				clearAction.handler(clearAction);
+				
+				if(completion)
+					completion();
+				return;
+			}
+		}
+		%orig;
+	}
+
+	%end
+
+%end
+
 void initMusicApp()
 {
 	@autoreleasepool
@@ -711,6 +741,9 @@ void initMusicApp()
 
 		if([preferences enableMusicAppCustomTint])
 			%init(customMusicAppTintColorGroup);
+
+		if([preferences hideKeepOrClearAlert])
+			%init(hideKeepOrClearAlertGroup, MusicApplicationTabController = NSClassFromString(@"MusicApplication.TabBarController"));
 
 		if([preferences colorizeMusicApp])
 			%init(retrieveArtworkGroup,

@@ -63,6 +63,8 @@
 		@"enableCustomRecentlyAddedColumnsNumber": @NO,
 		@"customRecentlyAddedColumnsNumber": @3,
 		@"hideQueueHUD": @NO,
+		@"hideKeepOrClearAlert": @NO,
+		@"keepOrClearAlertAction": @1,
 		@"vibrateMusicApp": @NO,
 		@"enableMusicAppCustomTint": @NO
 	}];
@@ -104,6 +106,8 @@
 	_enableCustomRecentlyAddedColumnsNumber = [_preferences boolForKey: @"enableCustomRecentlyAddedColumnsNumber"];
 	_customRecentlyAddedColumnsNumber = [_preferences integerForKey: @"customRecentlyAddedColumnsNumber"];
 	_hideQueueHUD = [_preferences boolForKey: @"hideQueueHUD"];
+	_hideKeepOrClearAlert = [_preferences boolForKey: @"hideKeepOrClearAlert"];
+	_keepOrClearAlertAction = [_preferences integerForKey: @"keepOrClearAlertAction"];
 	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
 	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];
 	if(_enableMusicAppCustomTint)
