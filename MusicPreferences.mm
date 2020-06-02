@@ -54,9 +54,14 @@
 
 		//MusicApp
 		@"colorizeMusicApp": @NO,
+		@"colorizeNowPlayingView": @NO,
+		@"colorizeQueueView": @NO,
+		@"colorizeMiniPlayerView": @NO,
 		@"addMusicAppBorder": @NO,
+		@"hideAlbumShadow": @NO,
 		@"musicAppBorderWidth": @4,
-		@"_3AlbumsPerLine": @NO,
+		@"enableCustomRecentlyAddedColumnsNumber": @NO,
+		@"customRecentlyAddedColumnsNumber": @3,
 		@"hideQueueHUD": @NO,
 		@"vibrateMusicApp": @NO,
 		@"enableMusicAppCustomTint": @NO
@@ -90,9 +95,14 @@
 	_vibrateMusicWidget = [_preferences boolForKey: @"vibrateMusicWidget"];
 
 	_colorizeMusicApp = [_preferences boolForKey: @"colorizeMusicApp"];
+	_colorizeNowPlayingView = [_preferences boolForKey: @"colorizeNowPlayingView"];
+	_colorizeQueueView = [_preferences boolForKey: @"colorizeQueueView"];
+	_colorizeMiniPlayerView = [_preferences boolForKey: @"colorizeMiniPlayerView"];
 	_addMusicAppBorder = [_preferences boolForKey: @"addMusicAppBorder"];
+	_hideAlbumShadow = [_preferences boolForKey: @"hideAlbumShadow"];
 	_musicAppBorderWidth = [_preferences integerForKey: @"musicAppBorderWidth"];
-	__3AlbumsPerLine = [_preferences boolForKey: @"_3AlbumsPerLine"];
+	_enableCustomRecentlyAddedColumnsNumber = [_preferences boolForKey: @"enableCustomRecentlyAddedColumnsNumber"];
+	_customRecentlyAddedColumnsNumber = [_preferences integerForKey: @"customRecentlyAddedColumnsNumber"];
 	_hideQueueHUD = [_preferences boolForKey: @"hideQueueHUD"];
 	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
 	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];

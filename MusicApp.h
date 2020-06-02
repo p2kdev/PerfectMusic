@@ -72,7 +72,6 @@
 @interface NowPlayingContentView : UIView
 @property(nonatomic, retain) UIImageView *artworkImageView;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey, id> *)change context:(void *)context;
-- (void)colorize;
 @end
 
 @interface NowPlayingTransportButton : MPButton
@@ -159,4 +158,8 @@
 
 @interface _MPCAVController: MPAVController
 - (MPMediaItem*)mediaItem;
+@end
+
+@interface UIScreen ()
+- (CGRect)_referenceBounds;
 @end
