@@ -27,7 +27,7 @@
 
 		//General
 		@"enabledMediaControlWithVolumeButtons": @NO,
-		@"swapVolumeButtonsOnLandscapeLeft": @NO,
+		@"swapVolumeButtonsBasedOnOrientation": @NO,
 		@"showNotification": @NO,
 
 		//Springboard
@@ -35,6 +35,10 @@
 		@"addExtraButtonsToControlCenter": @NO,
 
 		@"colorizeLockScreenMusicWidget": @NO,
+		@"hideAlbumArtwork": @NO,
+		@"hideRoutingButton": @NO,
+		@"lockScreenMusicWidgetStyle": @0,
+		@"lockScreenMusicWidgetCompactStyle": @0,
 		@"lockScreenMusicWidgetBackgroundColorAlpha": @1.0,
 		@"lockScreenMusicWidgetCornerRadius": @13,
 		@"disableTopLeftCornerRadius": @NO,
@@ -65,20 +69,26 @@
 		@"hideQueueHUD": @NO,
 		@"hideKeepOrClearAlert": @NO,
 		@"keepOrClearAlertAction": @1,
+		@"hideSeparators": @NO,
 		@"vibrateMusicApp": @NO,
-		@"enableMusicAppCustomTint": @NO
+		@"enableMusicAppCustomTint": @NO,
+		@"enableMusicAppNowPlayingViewCustomTint": @NO,
 	}];
 
 	_enabled = [_preferences boolForKey: @"enabled"];
 
 	_enabledMediaControlWithVolumeButtons = [_preferences boolForKey: @"enabledMediaControlWithVolumeButtons"];
-	_swapVolumeButtonsOnLandscapeLeft = [_preferences boolForKey: @"swapVolumeButtonsOnLandscapeLeft"];
+	_swapVolumeButtonsBasedOnOrientation = [_preferences boolForKey: @"swapVolumeButtonsBasedOnOrientation"];
 	_showNotification = [_preferences boolForKey: @"showNotification"];
 
 	_addExtraButtonsToLockScreen = [_preferences boolForKey: @"addExtraButtonsToLockScreen"];
 	_addExtraButtonsToControlCenter = [_preferences boolForKey: @"addExtraButtonsToControlCenter"];
 
 	_colorizeLockScreenMusicWidget = [_preferences boolForKey: @"colorizeLockScreenMusicWidget"];
+	_hideAlbumArtwork = [_preferences boolForKey: @"hideAlbumArtwork"];
+	_hideRoutingButton = [_preferences boolForKey: @"hideRoutingButton"];
+	_lockScreenMusicWidgetStyle = [_preferences integerForKey: @"lockScreenMusicWidgetStyle"];
+	_lockScreenMusicWidgetCompactStyle = [_preferences integerForKey: @"lockScreenMusicWidgetCompactStyle"];
 	_lockScreenMusicWidgetBackgroundColorAlpha = [_preferences doubleForKey: @"lockScreenMusicWidgetBackgroundColorAlpha"];
 	_lockScreenMusicWidgetCornerRadius = [_preferences integerForKey: @"lockScreenMusicWidgetCornerRadius"];
 	_disableTopLeftCornerRadius = [_preferences boolForKey: @"disableTopLeftCornerRadius"];
@@ -108,12 +118,15 @@
 	_hideQueueHUD = [_preferences boolForKey: @"hideQueueHUD"];
 	_hideKeepOrClearAlert = [_preferences boolForKey: @"hideKeepOrClearAlert"];
 	_keepOrClearAlertAction = [_preferences integerForKey: @"keepOrClearAlertAction"];
+	_hideSeparators = [_preferences boolForKey: @"hideSeparators"];
 	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
 	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];
-	if(_enableMusicAppCustomTint)
+	_enableMusicAppNowPlayingViewCustomTint = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomTint"];
+	if(_enableMusicAppCustomTint || _enableMusicAppNowPlayingViewCustomTint)
 	{
 		NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.colors.plist"];
 		_customMusicAppTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppTintColor"] withFallback: @"#FF9400"];
+		_customMusicAppNowPlayingViewTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewTintColor"] withFallback: @"#FF9400"];
 	}
 
 	return self;

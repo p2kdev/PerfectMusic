@@ -44,7 +44,7 @@
 PRESS BOTH VOLUME UP + VOLUME DOWN TO PLAY / PAUSE MEDIA.
 HOLD VOLUME UP FOR NEXT SONG.
 HOLD VOLUME DOWN FOR PREVIOUS SONG.
-'SWAP ON LANDSCAPE LEFT' OPTION SWAPS VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT.
+'SWAP BASED ON ORIENTATION' OPTION SWAPS VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT OR UPDSIDE DOWN.
 </string>
 		</dict>
 		<dict>
@@ -67,9 +67,9 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
-			<string>swapVolumeButtonsOnLandscapeLeft</string>
+			<string>swapVolumeButtonsBasedOnOrientation</string>
 			<key>label</key>
-			<string>Swap On Landscape Left</string>
+			<string>Swap Based On Orientation</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -106,6 +106,8 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>'ADD TO LOCKSCREEN' OPTION IS ONLY APPLIED WHEN WIDGET STYLE IS NORMAL.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -168,6 +170,90 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<string>addLockScreenMusicWidgetBorder</string>
 			<key>label</key>
 			<string>Add Border</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>HIDE ELEMENTS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>hideAlbumArtwork</string>
+			<key>label</key>
+			<string>Hide Album Artwork</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>hideRoutingButton</string>
+			<key>label</key>
+			<string>Hide Routing Button (Top Right)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>STYLE</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetStyle</string>
+			<key>validTitles</key>
+			<array>
+      			<string>Normal</string>
+      			<string>Compact</string>
+			</array>
+      		<key>validValues</key>
+			<array>
+      			<string>0</string>
+      			<string>1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>COMPACT STYLE OPTIONS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetCompactStyle</string>
+			<key>validTitles</key>
+			<array>
+      			<string>No Extras</string>
+      			<string>+ Time</string>
+      			<string>+ Volume</string>
+			</array>
+      		<key>validValues</key>
+			<array>
+      			<string>0</string>
+      			<string>1</string>
+      			<string>2</string>
+			</array>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -449,7 +535,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>COLORS</string>
+			<string>NOW PLAYING VIEW - DYNAMIC COLORS</string>
 			<key>footerText</key>
 			<string>FOR ANY COLORIZATION OPTION TO WORK, 'ENABLE COLORIZATION' SHOULD BE ENABLED. 'ADD BORDER TO NOW PLAYING VIEW' REQUIRES 'COLORIZE NOW PLAYING VIEW' OPTION TO BE ENABLED.</string>
 		</dict>
@@ -463,7 +549,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>key</key>
 			<string>colorizeMusicApp</string>
 			<key>label</key>
-			<string>Enable Colorization</string>
+			<string>Enable Dynamic Colors</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -517,7 +603,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>BORDER WIDTH</string>
+			<string>NOW PLAYING VIEW - BORDER WIDTH</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -538,6 +624,86 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<integer>15</integer>
 			<key>showValue</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>NOW PLAYING VIEW - CUSTOM TINT COLOR</string>
+			<key>footerText</key>
+			<string>'ENABLE DYNAMIC COLORS' OPTION SHOULD BE DISABLED FOR THE TINT COLOR TO BE APPLIED TO THE 'NOW PLAYING' VIEW.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewCustomTint</string>
+			<key>label</key>
+			<string>Enable Custom Tint</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusic13prefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewTintColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Custom Tint Color</string>
+			<key>key</key>
+			<string>customMusicAppTintColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>ALL OTHER VIEWS - CUSTOM TINT COLOR</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>enableMusicAppCustomTint</string>
+			<key>label</key>
+			<string>Enable Custom Tint</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusic13prefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppTintColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Custom Tint Color</string>
+			<key>key</key>
+			<string>customMusicAppTintColor</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -647,9 +813,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
-			<string>vibrateMusicApp</string>
+			<string>hideSeparators</string>
 			<key>label</key>
-			<string>Add Vibrations To UI Elements</string>
+			<string>Hide Separators</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -659,30 +825,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
-			<string>enableMusicAppCustomTint</string>
+			<string>vibrateMusicApp</string>
 			<key>label</key>
-			<string>Enable Custom Tint</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>com.johnzaro.perfectmusic13prefs.colors</string>
-				<key>key</key>
-				<string>customMusicAppTintColor</string>
-				<key>fallback</key>
-				<string>#FF9400</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Custom Tint Color</string>
-			<key>key</key>
-			<string>customMusicAppTintColor</string>
+			<string>Add Vibrations To UI Elements</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -712,7 +857,7 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>icon</key>
 			<string>github.png</string>
 			<key>url</key>
-   	 		<string>https://github.com/johnzaro/PerfectMusic13</string>
+   	 		<string>https://github.com/johnzaro/PerfectMusic</string>
 		</dict>
  		<dict>
 			<key>cell</key>

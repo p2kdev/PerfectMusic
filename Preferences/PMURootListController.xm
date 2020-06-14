@@ -20,7 +20,7 @@
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.font = [UIFont boldSystemFontOfSize: 17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"PerfectMusic13";
+        self.titleLabel.text = @"PerfectMusic";
 		self.titleLabel.alpha = 0.0;
         self.titleLabel.textColor = [UIColor blackColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -77,7 +77,7 @@
 - (void)reset: (PSSpecifier*)specifier
 {
     UIAlertController *reset = [UIAlertController
-        alertControllerWithTitle: @"PerfectMusic13"
+        alertControllerWithTitle: @"PerfectMusic"
 		message: @"Do you really want to Reset All Settings?"
 		preferredStyle: UIAlertControllerStyleAlert];
 	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle: @"Confirm" style: UIAlertActionStyleDestructive handler:

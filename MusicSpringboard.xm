@@ -224,7 +224,8 @@ static void produceLightVibration()
 		[[self shadow] setHidden: YES];
 		[[self artworkBackground] setHidden: YES];
 
-		[[self routingButton] colorize];
+		if(![preferences hideRoutingButton])
+			[[self routingButton] colorize];
 	}
 
 	%end
@@ -392,6 +393,43 @@ static void produceLightVibration()
 
 %end
 
+%group hideAlbumArtworkGroup
+
+	%hook MediaControlsHeaderView
+
+	- (void)layoutSubviews
+	{
+		%orig;
+
+		if([preferences hideAlbumArtwork] && [[[self _viewControllerForAncestor] parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
+		{
+			[[self artworkBackground] removeFromSuperview];
+			[[self placeholderArtworkView] removeFromSuperview];
+			[[self artworkView] removeFromSuperview];
+			[[self shadow] removeFromSuperview];
+		}
+	}
+
+	%end
+
+%end
+
+%group hideRoutingButtonGroup
+
+	%hook MRPlatterViewController
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+		
+		if([[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
+			[[[self nowPlayingHeaderView] routingButton] removeFromSuperview];
+	}
+
+	%end
+
+%end
+
 %group vibrateMusicWidgetGroup
 
 	%hook MediaControlsRoutingButtonView
@@ -454,6 +492,12 @@ void initMusicWidget()
 
 		if([preferences colorizeLockScreenMusicWidget] || [preferences colorizeControlCenterMusicWidget])
 			%init(colorizeWidgetGroup);
+
+		if([preferences hideAlbumArtwork])
+			%init(hideAlbumArtworkGroup);
+
+		if([preferences hideRoutingButton])
+			%init(hideRoutingButtonGroup);
 
 		if([preferences vibrateMusicWidget] && ![preferences isIpad])
 			%init(vibrateMusicWidgetGroup);

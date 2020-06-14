@@ -7,7 +7,8 @@ static NSArray *const NOTCHED_IPHONES = @[@"iPhone10,3", @"iPhone10,6", @"iPhone
 static BOOL isNotchediPhone;
 static CGFloat screenWidth;
 static NSInteger customRecentlyAddedColumnsNumber;
-static BOOL hideAlbumShadow;
+static UIColor *customNowPlayingViewTintColor;
+static UIColor *systemBackgroundColor;
 
 static MusicPreferences *preferences;
 static Colorizer *colorizer;
@@ -246,20 +247,6 @@ static NSString* getDeviceModel()
 
 		[MSHookIvar<PlayerTimeControl*>(self, "timeControl") colorize];
 		[MSHookIvar<MPVolumeSlider*>(self, "volumeSlider") colorize];
-	}
-
-	%end
-
-	// -------------------------------------- NowPlayingContentView  ------------------------------------------------
-
-	%hook NowPlayingContentView
-
-	- (void)layoutSubviews // USE THIS SECOND WAY TO READ THE ARTWORK IN CASE ARTWORK IS LOADED FROM INTERNET AND PREVIOUS WAY FAILS
-	{
-		%orig;
-
-		if(hideAlbumShadow)
-			[[self layer] setShadowOpacity: 0];
 	}
 
 	%end
@@ -674,6 +661,8 @@ static NSString* getDeviceModel()
 
 %end
 
+// -------------------------------------- MUSIC APP GENERAL TINT COLOR  ------------------------------------------------
+
 %group customMusicAppTintColorGroup
 
 	%hook UIColor
@@ -681,6 +670,236 @@ static NSString* getDeviceModel()
 	+ (id)systemPinkColor
 	{
 		return [preferences customMusicAppTintColor];
+	}
+
+	%end
+
+%end
+
+// -------------------------------------- NOW PLAYING VIEW CUSTOM TINT COLOR  ------------------------------------------------
+
+%group customMusicAppNowPlayingViewTintColorGroup
+
+	// -------------------------------------- MusicNowPlayingControlsViewController  ------------------------------------------------
+
+	%hook MusicNowPlayingControlsViewController
+
+	- (void)viewDidLayoutSubviews	
+	{
+		%orig;
+		[self colorize];
+	}
+
+	%new
+	- (void)colorize
+	{
+		if([[self traitCollection] userInterfaceStyle] == UIUserInterfaceStyleDark)
+			systemBackgroundColor = [UIColor blackColor];
+		else
+			systemBackgroundColor = [UIColor whiteColor];
+
+		UIView *grabberView = MSHookIvar<UIView*>(self, "grabberView");
+		[grabberView setCustomBackgroundColor: customNowPlayingViewTintColor];
+		[grabberView setBackgroundColor: customNowPlayingViewTintColor];
+
+		[[self subtitleButton] setCustomTitleColor: customNowPlayingViewTintColor];
+		[[self subtitleButton] setTitleColor: customNowPlayingViewTintColor forState: UIControlStateNormal];
+		
+		[[self accessibilityLyricsButton] setSpecialButton: @1];
+		[[self accessibilityLyricsButton] setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+
+		[[self routeButton] setCustomTintColor: customNowPlayingViewTintColor];
+		[[self routeButton] setTintColor: customNowPlayingViewTintColor];
+
+		[[self routeLabel] setCustomTextColor: customNowPlayingViewTintColor];
+		[[self routeLabel] setTextColor: customNowPlayingViewTintColor];
+
+		[[self accessibilityQueueButton] setSpecialButton: @2];
+		[[self accessibilityQueueButton] setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+
+		UIView *queueModeBadgeView = MSHookIvar<UIView*>(self, "queueModeBadgeView");
+		[queueModeBadgeView setCustomTintColor: systemBackgroundColor];
+		[queueModeBadgeView setTintColor: systemBackgroundColor];
+		[queueModeBadgeView setCustomBackgroundColor: customNowPlayingViewTintColor];
+		[queueModeBadgeView setBackgroundColor: customNowPlayingViewTintColor];
+
+		[[self leftButton] colorize];
+		[[self playPauseStopButton] colorize];
+		[[self rightButton] colorize];
+
+		[[[self contextButton] superview] setAlpha: 1.0];
+		[[self contextButton] colorize];
+
+		[MSHookIvar<PlayerTimeControl*>(self, "timeControl") colorize];
+		[MSHookIvar<MPVolumeSlider*>(self, "volumeSlider") colorize];
+	}
+
+	%end
+
+	// -------------------------------------- ContextualActionsButton  ------------------------------------------------
+
+	%hook ContextualActionsButton
+
+	%new
+	- (void)colorize
+	{
+		[self setCustomTintColor: customNowPlayingViewTintColor];
+		[self setTintColor: customNowPlayingViewTintColor];
+
+		UIImageView *ellipsisImageView = MSHookIvar<UIImageView*>(self, "ellipsisImageView");
+		[ellipsisImageView setCustomTintColor: systemBackgroundColor];
+		[ellipsisImageView setTintColor: systemBackgroundColor];
+	}
+
+	%end
+
+	// -------------------------------------- PlayerTimeControl  ------------------------------------------------
+
+	%hook PlayerTimeControl
+
+	%new
+	- (void)colorize
+	{
+		[self setCustomTintColor: customNowPlayingViewTintColor];
+		[self setTintColor: customNowPlayingViewTintColor];
+
+		MSHookIvar<UIColor*>(self, "trackingTintColor") = customNowPlayingViewTintColor;
+
+		[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setCustomTextColor: customNowPlayingViewTintColor];
+		[MSHookIvar<UILabel*>(self, "remainingTimeLabel") setTextColor: customNowPlayingViewTintColor];
+		[MSHookIvar<UIView*>(self, "remainingTrack") setCustomBackgroundColor: customNowPlayingViewTintColor];
+		[MSHookIvar<UIView*>(self, "remainingTrack") setBackgroundColor: customNowPlayingViewTintColor];
+		[MSHookIvar<UIView*>(self, "knobView") setCustomBackgroundColor: customNowPlayingViewTintColor];
+		[MSHookIvar<UIView*>(self, "knobView") setBackgroundColor: customNowPlayingViewTintColor];
+	}
+
+	%end
+
+	// -------------------------------------- NowPlayingTransportButton  ------------------------------------------------
+
+	%hook NowPlayingTransportButton
+
+	- (void)setImage: (id)arg1 forState: (unsigned long long)arg2
+	{
+		%orig([(UIImage*)arg1 imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate], arg2);
+	}
+
+	%new
+	- (void)colorize
+	{
+		[[self imageView] setCustomTintColor: customNowPlayingViewTintColor];
+		[[self imageView] setTintColor: customNowPlayingViewTintColor];
+		[[[self imageView] layer] setCompositingFilter: 0];
+
+		[MSHookIvar<UIView*>(self, "highlightIndicatorView") setBackgroundColor: customNowPlayingViewTintColor];
+	}
+
+	%end
+
+	// -------------------------------------- MPVolumeSlider  ------------------------------------------------
+
+	%hook MPVolumeSlider
+
+	%new
+	- (void)colorize
+	{
+		[self setCustomTintColor: customNowPlayingViewTintColor];
+		[self setTintColor: customNowPlayingViewTintColor];
+
+		[[self _minValueView] setTintColor: customNowPlayingViewTintColor];
+		[[self _maxValueView] setTintColor: customNowPlayingViewTintColor];
+
+		[self setCustomMinimumTrackTintColor: customNowPlayingViewTintColor];
+		[self setMinimumTrackTintColor: customNowPlayingViewTintColor];
+		[self setCustomMaximumTrackTintColor: customNowPlayingViewTintColor];
+		[self setMaximumTrackTintColor: customNowPlayingViewTintColor];
+
+		[[self thumbView] setCustomTintColor: customNowPlayingViewTintColor];
+		[[self thumbView] setTintColor: customNowPlayingViewTintColor];
+		[[[self thumbView] layer] setShadowColor: customNowPlayingViewTintColor.CGColor];
+		if([[self thumbImageForState: UIControlStateNormal] renderingMode] != UIImageRenderingModeAlwaysTemplate)
+			[self setThumbImage: [[self thumbImageForState: UIControlStateNormal] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState: UIControlStateNormal];
+	}
+
+	%end
+
+	%hook MiniPlayerViewController
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+		[self colorize];
+	}
+
+	- (void)controller: (id)arg1 defersResponseReplacement: (id)arg2
+	{
+		%orig;
+		dispatch_async(dispatch_get_main_queue(),
+		^{
+			[self colorize];
+		});
+	}
+
+	%new
+	- (void)colorize
+	{
+		[[self playPauseButton] colorize];
+		[[self skipButton] colorize];
+	}
+
+	%end
+
+	%hook NowPlayingQueueViewController
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+		[self colorize];
+	}
+
+	%new
+	- (void)colorize
+	{
+		[MSHookIvar<NowPlayingQueueHeaderView*>(self, "upNextHeader") colorize];
+		[MSHookIvar<NowPlayingHistoryHeaderView*>(self, "historyHeader") colorize];
+	}
+
+	%end
+
+	%hook NowPlayingHistoryHeaderView
+
+	%new
+	- (void)colorize
+	{
+		for (UIView *subview in [self subviews])
+		{
+			if([subview isKindOfClass: %c(UIButton)])
+				[(UIButton*)subview setTintColor: customNowPlayingViewTintColor];
+		}
+	}
+
+	%end
+
+	%hook NowPlayingQueueHeaderView
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+		[self colorize];
+	}
+
+	%new
+	- (void)colorize
+	{
+		[MSHookIvar<MPButton*>(self, "subtitleButton") setTintColor: customNowPlayingViewTintColor];
+
+		MPButton *shuffleButton = MSHookIvar<MPButton*>(self, "shuffleButton");
+		[shuffleButton setSpecialButton: @3];
+		[shuffleButton setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+
+		MPButton *repeatButton = MSHookIvar<MPButton*>(self, "repeatButton");
+		[repeatButton setSpecialButton: @3];
+		[repeatButton setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
 	}
 
 	%end
@@ -707,10 +926,42 @@ static NSString* getDeviceModel()
 				
 				if(completion)
 					completion();
-				return;
 			}
 		}
+		else 
+			%orig;
+	}
+
+	%end
+
+%end
+
+// -------------------------------------- HIDE SEPARATOR --------------------------------------
+
+%group hideSeparatorsGroup
+
+	%hook UITableViewCell
+
+	- (void)_updateSeparatorContent
+	{
+
+	}
+
+	%end
+
+%end
+
+// -------------------------------------- HIDE ALBUM SHADOW --------------------------------------
+
+%group hideAlbumShadowGroup
+
+	%hook NowPlayingContentView
+
+	- (void)layoutSubviews
+	{
 		%orig;
+
+		[[self layer] setShadowOpacity: 0];
 	}
 
 	%end
@@ -725,13 +976,19 @@ void initMusicApp()
 		colorizer = [Colorizer sharedInstance];
 
 		isNotchediPhone = [NOTCHED_IPHONES containsObject: getDeviceModel()];
+
+		if([preferences hideAlbumShadow])
+			%init(hideAlbumShadowGroup, NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"));
 		
 		if([preferences enableCustomRecentlyAddedColumnsNumber] && ![preferences isIpad])
 		{
 			screenWidth = [[UIScreen mainScreen] _referenceBounds].size.width;
 			customRecentlyAddedColumnsNumber = [preferences customRecentlyAddedColumnsNumber];
 			%init(customRecentlyAddedColumnsNumberGroup);
-		} 
+		}
+
+		if([preferences hideSeparators])
+			%init(hideSeparatorsGroup);
 
 		if([preferences vibrateMusicApp] && ![preferences isIpad]) 
 			%init(vibrateMusicAppGroup, TimeSlider = NSClassFromString(@"MusicApplication.PlayerTimeControl"));
@@ -746,32 +1003,45 @@ void initMusicApp()
 			%init(hideKeepOrClearAlertGroup, MusicApplicationTabController = NSClassFromString(@"MusicApplication.TabBarController"));
 
 		if([preferences colorizeMusicApp])
+		{
 			%init(retrieveArtworkGroup,
 				NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"),
 				MiniPlayerViewController = NSClassFromString(@"MusicApplication.MiniPlayerViewController"));
 
-		if([preferences colorizeNowPlayingView])
-			%init(colorizeNowPlayingViewGroup,
-				NowPlayingViewController = NSClassFromString(@"MusicApplication.NowPlayingViewController"),
-				NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"),
-				PlayerTimeControl = NSClassFromString(@"MusicApplication.PlayerTimeControl"),
-				ContextualActionsButton = NSClassFromString(@"MusicApplication.ContextualActionsButton"));
+			if([preferences colorizeNowPlayingView])
+				%init(colorizeNowPlayingViewGroup,
+					NowPlayingViewController = NSClassFromString(@"MusicApplication.NowPlayingViewController"),
+					NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"),
+					PlayerTimeControl = NSClassFromString(@"MusicApplication.PlayerTimeControl"),
+					ContextualActionsButton = NSClassFromString(@"MusicApplication.ContextualActionsButton"));
 
-		if([preferences colorizeQueueView])
-			%init(colorizeQueueViewGroup,
-				NowPlayingQueueViewController = NSClassFromString(@"MusicApplication.NowPlayingQueueViewController"),
-				NowPlayingQueueHeaderView = NSClassFromString(@"MusicApplication.NowPlayingQueueHeaderView"),
-				NowPlayingHistoryHeaderView = NSClassFromString(@"MusicApplication.NowPlayingHistoryHeaderView"),
-				QueueGradientView = NSClassFromString(@"MusicApplication.QueueGradientView"));
+			if([preferences colorizeQueueView])
+				%init(colorizeQueueViewGroup,
+					NowPlayingQueueViewController = NSClassFromString(@"MusicApplication.NowPlayingQueueViewController"),
+					NowPlayingQueueHeaderView = NSClassFromString(@"MusicApplication.NowPlayingQueueHeaderView"),
+					NowPlayingHistoryHeaderView = NSClassFromString(@"MusicApplication.NowPlayingHistoryHeaderView"),
+					QueueGradientView = NSClassFromString(@"MusicApplication.QueueGradientView"));
 
-		if([preferences colorizeMiniPlayerView])
-			%init(colorizeMiniPlayerGroup, 
-				MiniPlayerViewController = NSClassFromString(@"MusicApplication.MiniPlayerViewController"));
+			if([preferences colorizeMiniPlayerView])
+				%init(colorizeMiniPlayerGroup, 
+					MiniPlayerViewController = NSClassFromString(@"MusicApplication.MiniPlayerViewController"));
 
-		if([preferences colorizeNowPlayingView] || [preferences colorizeMiniPlayerView])
-			%init(sharedViewsGroup,
-			NowPlayingTransportButton = NSClassFromString(@"MusicApplication.NowPlayingTransportButton"));
-
-		hideAlbumShadow = [preferences hideAlbumShadow];
+			if([preferences colorizeNowPlayingView] || [preferences colorizeMiniPlayerView])
+				%init(sharedViewsGroup,
+				NowPlayingTransportButton = NSClassFromString(@"MusicApplication.NowPlayingTransportButton"));
+		}
+		else if([preferences enableMusicAppNowPlayingViewCustomTint])
+		{
+			customNowPlayingViewTintColor = [preferences customMusicAppNowPlayingViewTintColor];
+			%init(customMusicAppNowPlayingViewTintColorGroup,
+			PlayerTimeControl = NSClassFromString(@"MusicApplication.PlayerTimeControl"),
+			NowPlayingTransportButton = NSClassFromString(@"MusicApplication.NowPlayingTransportButton"),
+			MiniPlayerViewController = NSClassFromString(@"MusicApplication.MiniPlayerViewController"),
+			NowPlayingQueueViewController = NSClassFromString(@"MusicApplication.NowPlayingQueueViewController"),
+			NowPlayingQueueHeaderView = NSClassFromString(@"MusicApplication.NowPlayingQueueHeaderView"),
+			NowPlayingHistoryHeaderView = NSClassFromString(@"MusicApplication.NowPlayingHistoryHeaderView"),
+			QueueGradientView = NSClassFromString(@"MusicApplication.QueueGradientView"),
+			ContextualActionsButton = NSClassFromString(@"MusicApplication.ContextualActionsButton"));
+		}
 	}
 }

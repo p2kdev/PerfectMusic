@@ -7,6 +7,7 @@ extern void initMusicApp();
 extern void initMusicAppHelper();
 extern void initExtraButtons();
 extern void initMediaNotification();
+extern void initCompactMediaPlayer();
 
 static MusicPreferences *preferences;
 
@@ -29,6 +30,8 @@ static MusicPreferences *preferences;
                     initExtraButtons();
                 initVolumeControl();
                 initMusicWidgetHelper();
+                if([preferences lockScreenMusicWidgetStyle] == 1)
+                    initCompactMediaPlayer();
                 initMusicWidget();
             }
             if(isMusicApp)

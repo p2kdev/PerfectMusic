@@ -14,7 +14,7 @@ static MusicPreferences *preferences;
 
 	if(!shuffleImages)
 	{
-		NSBundle *bundle = [[NSBundle alloc] initWithPath: @"/Library/PreferenceBundles/PerfectMusic13Prefs.bundle"];
+		NSBundle *bundle = [[NSBundle alloc] initWithPath: @"/Library/PreferenceBundles/PerfectMusicPrefs.bundle"];
 		shuffleImages = [[NSMutableArray alloc] init];
 		repeatImages = [[NSMutableArray alloc] init];
 		[shuffleImages addObject: [[UIImage imageNamed: @"Shuffle-Off" inBundle: bundle compatibleWithTraitCollection: nil] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate]];
@@ -71,7 +71,7 @@ static MusicPreferences *preferences;
 		UIViewController *controller = [[self  _viewControllerForAncestor] parentViewController];
 		if([controller isKindOfClass: %c(CSMediaControlsViewController)] || [controller isKindOfClass: %c(MediaControlsEndpointsViewController)])
 		{
-			if([preferences addExtraButtonsToLockScreen] && [controller isKindOfClass: %c(CSMediaControlsViewController)]
+			if([preferences addExtraButtonsToLockScreen] && [preferences lockScreenMusicWidgetStyle] == 0 && [controller isKindOfClass: %c(CSMediaControlsViewController)]
 			|| [preferences addExtraButtonsToControlCenter] && [controller isKindOfClass: %c(MediaControlsEndpointsViewController)])
 				[self setHasExtraButtons: @YES];
 			else

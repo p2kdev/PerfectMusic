@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>PerfectMusic13Prefs</string>
+	<string>PerfectMusicPrefs</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.johnzaro.perfectmusic13prefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>

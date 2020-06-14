@@ -6,7 +6,7 @@
 @end
 
 @interface UIBezierPath ()
-+ (id)roundedRectBezierPath:(CGRect)arg1 withTopCornerRadius:(double)arg2 withBottomCornerRadius:(double)arg3;
++ (id)roundedRectBezierPath: (CGRect)arg1 withTopCornerRadius: (double)arg2 withBottomCornerRadius: (double)arg3;
 @end
 
 @interface CALayer ()
@@ -39,24 +39,25 @@
 @end
 
 @interface MPRouteLabel: UILabel
-- (UIColor *)customTextColor;
+- (UIColor*)customTextColor;
 - (void)setCustomTextColor:(UIColor *)arg;
 @end
 
 @interface UIButton ()
-- (UIColor *)customBackgroundColor;
+- (UIColor*)customBackgroundColor;
 - (void)setCustomBackgroundColor:(UIColor *)arg;
 - (UIColor*)customTintColor;
 - (void)setCustomTintColor: (UIColor*)arg;
 - (id)specialButton;
 - (void)setSpecialButton: (id)type;
-- (void)updateButtonColor;
 - (UIColor*)customTitleColor;
 - (void)setCustomTitleColor: (UIColor*)arg;
-- (NSString *)currentTitle;
+- (NSString*)currentTitle;
 @end
 
 @interface MPButton: UIButton
+- (void)updateButtonColor;
+- (void)setCustomButtonTintColorWithBackgroundColor: (UIColor*)bgColor;
 @end
 
 @interface MPVolumeSlider: UISlider

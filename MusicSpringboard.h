@@ -5,6 +5,15 @@
 - (id)advance;
 @end
 
+@interface NextUpManager: NSObject
+- (_Bool)lockscreenEnabled;
+@end
+
+@interface NextUpViewController : UIViewController
+@property(retain, nonatomic) NextUpManager *manager;
+@property(nonatomic) _Bool controlCenter;
+@end
+
 @interface _MPCPlayerRepeatCommand : NSObject
 - (BOOL)supportsChangeRepeat;
 - (BOOL)supportsAdvanceRepeat;
@@ -57,14 +66,18 @@
 - (void)setColour: (UIColor*)arg;
 @end
 
-@interface MediaControlsTransportButton : MPButton
+@interface MediaControlsTransportButton: MPButton
 @end
 
-@interface MediaControlsTransportStackView : UIView
+@interface MediaControlsPanelViewController: UIViewController
+@end
+
+@interface MediaControlsTransportStackView: UIView
 @property(nonatomic, retain) MediaControlsTransportButton *leftButton;
 @property(nonatomic, retain) MediaControlsTransportButton *middleButton;
 @property(nonatomic, retain) MediaControlsTransportButton *rightButton;
 - (id)_createTransportButton;
+- (void)setStyle:(long long)arg1;
 - (MediaControlsTransportButton*)tvRemoteButton;
 - (MediaControlsTransportButton*)languageOptionsButton;
 - (void)_updateButtonVisualStyling:(UIButton *)button;
@@ -100,6 +113,7 @@
 - (id)_viewControllerForAncestor;
 - (UIColor *)customBackgroundColor;
 - (void)setCustomBackgroundColor:(UIColor *)arg;
+- (id)_rootView;
 @end
 
 @interface MTVisualStylingProvider: NSObject
@@ -167,7 +181,10 @@
 @end
 
 @interface MediaControlsHeaderView: UIView
+@property(nonatomic, retain) MTMaterialView *artworkBackground;
+@property(nonatomic, retain) UIImageView *placeholderArtworkView;
 @property(nonatomic, retain) UIImageView *artworkView;
+@property(nonatomic, retain) UIView *shadow;
 @property(nonatomic, retain) MPRouteLabel *routeLabel;
 @property(nonatomic, retain) UILabel *primaryLabel;
 @property(nonatomic, retain) UILabel *secondaryLabel;
@@ -202,8 +219,4 @@
 - (void)colorize;
 - (BOOL)isViewControllerOfLockScreenMusicWidget;
 - (BOOL)isViewControllerOfControlCenterMusicWidget;
-@end
-
-@interface NextUpViewController : UIViewController
-@property(nonatomic) _Bool controlCenter;
 @end

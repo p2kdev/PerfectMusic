@@ -1,5 +1,11 @@
+#import "MusicPreferences.h"
 #import "MusicApp.h"
 #import "Colorizer.h"
+
+static MusicPreferences *preferences;
+
+static UIColor *customNowPlayingViewTintColor;
+static UIColor *systemBackgroundColor;
 
 %hook MPVolumeSlider
 
@@ -49,14 +55,24 @@
 {
 	%orig;
     if([self specialButton])
-		[self updateButtonColor];
+	{
+		if([preferences colorizeMusicApp])
+			[self updateButtonColor];
+		else if([preferences enableMusicAppNowPlayingViewCustomTint])
+			[self setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+	}
 }
 
 - (void)setSelected: (BOOL)arg
 {
 	%orig;
 	if([self specialButton])
-		[self updateButtonColor];
+	{
+		if([preferences colorizeMusicApp])
+			[self updateButtonColor];
+		else if([preferences enableMusicAppNowPlayingViewCustomTint])
+			[self setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+	}
 }
 
 %new
@@ -94,6 +110,46 @@
 	{
 		[self setCustomTintColor: [colorizer secondaryColor]];
 		[self setTintColor: [colorizer secondaryColor]];
+		[self setCustomBackgroundColor: [UIColor clearColor]];
+		[self setBackgroundColor: [UIColor clearColor]];
+	}
+}
+
+%new
+- (void)setCustomButtonTintColorWithBackgroundColor: (UIColor*)bgColor
+{
+	systemBackgroundColor = bgColor;
+
+	[[self layer] setCornerRadius: 7];
+
+	id type = [self specialButton]; // type 1 == lyrics button, type 2 == queue button, type 3 == queue header buttons
+
+	if(![type isEqual: @2])
+		[[self imageView] setImage: [[[self imageView] image] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate]];
+	else
+		[self setImage: [[[self imageView] image] imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState: UIControlStateSelected];
+	
+	if([self isSelected])
+	{
+		if([type isEqual: @1])
+		{
+			[self setCustomTintColor: customNowPlayingViewTintColor];
+			[self setTintColor: customNowPlayingViewTintColor];
+			[self setCustomBackgroundColor: [UIColor clearColor]];
+			[self setBackgroundColor: [UIColor clearColor]];
+		}
+		else
+		{
+			[self setCustomTintColor: systemBackgroundColor];
+			[self setTintColor: systemBackgroundColor];
+			[self setCustomBackgroundColor: customNowPlayingViewTintColor];
+			[self setBackgroundColor: customNowPlayingViewTintColor];
+		}
+	}
+	else
+	{
+		[self setCustomTintColor: customNowPlayingViewTintColor];
+		[self setTintColor: customNowPlayingViewTintColor];
 		[self setCustomBackgroundColor: [UIColor clearColor]];
 		[self setBackgroundColor: [UIColor clearColor]];
 	}
@@ -331,5 +387,9 @@
 
 void initMusicAppHelper()
 {
+	preferences = [MusicPreferences sharedInstance];
+	if([preferences enableMusicAppNowPlayingViewCustomTint])
+		customNowPlayingViewTintColor = [preferences customMusicAppNowPlayingViewTintColor];
+
 	%init;
 }
