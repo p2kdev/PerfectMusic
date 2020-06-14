@@ -47,6 +47,10 @@
 @property(nonatomic, readonly) UIColor *customMusicAppTintColor;
 @property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomTint;
 @property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewTintColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomBackgroundColor;
+@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewBackgroundColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomBorderColor;
+@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewBorderColor;
 
 @property(nonatomic, readonly) BOOL isIpad;
 

@@ -6,6 +6,22 @@ static BOOL hideAlbumArtwork;
 static BOOL hideRoutingButton;
 static BOOL isIpad;
 
+static CGFloat mediaWidgetWidth = 0;
+
+// ------------------ CSAdjunctItemView ------------------
+
+%hook CSAdjunctItemView
+
+- (void)layoutSubviews
+{
+	%orig;
+
+	if(mediaWidgetWidth == 0)
+		mediaWidgetWidth = [self frame].size.width;
+}
+
+%end
+
 // ------------------ CSMediaControlsViewController ------------------
 
 %hook CSMediaControlsViewController
@@ -46,7 +62,7 @@ static BOOL isIpad;
 - (void)setFrame: (CGRect)frame
 {
 	if([[[self _viewControllerForAncestor] parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
-		frame.size.width = isIpad ? 380 : 190;
+		frame.size.width = mediaWidgetWidth * (isIpad ? 0.6835 : 0.5905);
 	%orig;
 }
 
@@ -54,7 +70,7 @@ static BOOL isIpad;
 {
 	CGRect frame = %orig;
 	if([[[self _viewControllerForAncestor] parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
-		frame.size.width = isIpad ? 380 : 190;
+		frame.size.width = mediaWidgetWidth * (isIpad ? 0.6835 : 0.5905);
 	return frame;
 }
 
@@ -65,10 +81,10 @@ static BOOL isIpad;
 		if(hideAlbumArtwork)
 		{
 			frame.origin.x = 18;
-			frame.size.width = isIpad ? 370 : 200;
+			frame.size.width = mediaWidgetWidth * (isIpad ? 0.6655 : 0.5571);
 		}
 		else
-			frame.size.width = isIpad ? 300 : 135;
+			frame.size.width = mediaWidgetWidth * (isIpad ? 0.5396 : 0.3760);
 	}
 
 	return %orig;
@@ -101,22 +117,20 @@ static BOOL isIpad;
 {
 	if(!hideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
-		int x;
 		if(isIpad)
-		{	
+		{
 			if(NSClassFromString(@"NextUpMediaHeaderView"))
-				x = 502;
+				frame.origin.x = mediaWidgetWidth * 0.9028;
 			else
-				x = 512;
+				frame.origin.x = mediaWidgetWidth * 0.9208;
 		}
 		else
 		{
 			if(NSClassFromString(@"NextUpMediaHeaderView"))
-				x = 303;
+				frame.origin.x = mediaWidgetWidth * 0.8440;
 			else
-				x = 315;
+				frame.origin.x = mediaWidgetWidth * 0.8774;
 		}
-		frame.origin.x = x;
 		frame.origin.y = -20;
 	}
 	%orig;
@@ -127,22 +141,20 @@ static BOOL isIpad;
 	CGRect frame = %orig;
 	if(!hideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
-		int x;
 		if(isIpad)
 		{
 			if(NSClassFromString(@"NextUpMediaHeaderView"))
-				x = 502;
+				frame.origin.x = mediaWidgetWidth * 0.9028;
 			else
-				x = 512;
+				frame.origin.x = mediaWidgetWidth * 0.9208;
 		}
 		else
 		{
 			if(NSClassFromString(@"NextUpMediaHeaderView"))
-				x = 303;
+				frame.origin.x = mediaWidgetWidth * 0.8440;
 			else
-				x = 315;
+				frame.origin.x = mediaWidgetWidth * 0.8774;
 		}
-		frame.origin.x = x;
 		frame.origin.y = -20;
 	}
 	return frame;
@@ -196,7 +208,7 @@ static BOOL isIpad;
 
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
-		[[self transportStackView] setFrame: CGRectMake(isIpad ? 382 : 200, 37, 150, 35)];
+		[[[self transportStackView] tvRemoteButton] removeFromSuperview];
 
 		MediaControlsTimeControl *timeControl = [self timeControl];
 		if(style == 1)
@@ -208,6 +220,37 @@ static BOOL isIpad;
 		else
 			[timeControl removeFromSuperview];
 	}
+}
+
+%end
+
+// ------------------ MediaControlsTransportStackView ------------------
+
+%hook MediaControlsTransportStackView
+
+- (void)setFrame: (CGRect)frame
+{
+	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+	{
+		frame.origin.x = mediaWidgetWidth * (isIpad ? 0.6978 : 0.5571);
+		frame.origin.y = 37;
+		frame.size.width = 150;
+		frame.size.height = 35;
+	}
+	%orig;
+}
+
+- (CGRect)frame
+{
+	CGRect frame = %orig;
+	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+	{
+		frame.origin.x = mediaWidgetWidth * (isIpad ? 0.6978 : 0.5571);
+		frame.origin.y = 37;
+		frame.size.width = 150;
+		frame.size.height = 35;
+	}
+	return frame;
 }
 
 %end

@@ -680,15 +680,74 @@ static NSString* getDeviceModel()
 
 %group customMusicAppNowPlayingViewTintColorGroup
 
-	// -------------------------------------- MusicNowPlayingControlsViewController  ------------------------------------------------
+	%hook NowPlayingViewController
 
-	%hook MusicNowPlayingControlsViewController
-
-	- (void)viewDidLayoutSubviews	
+	- (void)viewDidLayoutSubviews
 	{
 		%orig;
 		[self colorize];
 	}
+
+	%new
+	- (void)colorize
+	{
+		MusicNowPlayingControlsViewController *musicNowPlayingControlsViewController = MSHookIvar<MusicNowPlayingControlsViewController*>(self, "controlsViewController");
+		if([preferences enableMusicAppNowPlayingViewCustomBackgroundColor]
+		|| [preferences enableMusicAppNowPlayingViewCustomBorderColor])
+		{
+			UIView *backgroundView = MSHookIvar<UIView*>(self, "backgroundView");
+			UIView *contentView = [backgroundView contentView];
+			UIView *newView = [contentView viewWithTag: 0xffeedd];
+			if(!newView)
+			{
+				newView = [[UIView alloc] initWithFrame: [contentView bounds]];
+				[newView setAutoresizingMask: UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+				[newView setTag: 0xffeedd];
+				[newView setOpaque: NO];
+				[newView setClipsToBounds: YES];
+
+				if([preferences enableMusicAppNowPlayingViewCustomBorderColor])
+				{
+					if(isNotchediPhone)
+						roundCorners(newView, 10, 40);
+					else
+					{
+						[[newView layer] setCornerRadius: 10];
+						[[newView layer] setBorderWidth: [preferences musicAppBorderWidth]];
+						[[newView layer] setMaskedCorners: kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner];
+					}
+				}
+
+				[contentView addSubview: newView];
+			}
+			
+			[contentView setBackgroundColor: [UIColor clearColor]];
+
+			UIView *bottomContainerView = MSHookIvar<UIView*>(musicNowPlayingControlsViewController, "bottomContainerView");
+			[bottomContainerView setCustomBackgroundColor: [UIColor clearColor]];
+			[bottomContainerView setBackgroundColor: [UIColor clearColor]];
+
+			if([preferences enableMusicAppNowPlayingViewCustomBackgroundColor])
+				[newView setBackgroundColor: [preferences customMusicAppNowPlayingViewBackgroundColor]];
+
+			if([preferences enableMusicAppNowPlayingViewCustomBorderColor])
+			{
+				if(isNotchediPhone)
+					[((CAShapeLayer*)[[newView layer] sublayers][0]) setStrokeColor: [preferences customMusicAppNowPlayingViewBorderColor].CGColor];
+				else
+					[[newView layer] setBorderColor: [preferences customMusicAppNowPlayingViewBorderColor].CGColor];
+			}
+		}
+
+		if([preferences enableMusicAppNowPlayingViewCustomTint])
+			[musicNowPlayingControlsViewController colorize];
+	}
+
+	%end
+
+	// -------------------------------------- MusicNowPlayingControlsViewController  ------------------------------------------------
+
+	%hook MusicNowPlayingControlsViewController
 
 	%new
 	- (void)colorize
@@ -1030,10 +1089,11 @@ void initMusicApp()
 				%init(sharedViewsGroup,
 				NowPlayingTransportButton = NSClassFromString(@"MusicApplication.NowPlayingTransportButton"));
 		}
-		else if([preferences enableMusicAppNowPlayingViewCustomTint])
+		else if([preferences enableMusicAppNowPlayingViewCustomBackgroundColor] || [preferences enableMusicAppNowPlayingViewCustomBorderColor] || [preferences enableMusicAppNowPlayingViewCustomTint])
 		{
 			customNowPlayingViewTintColor = [preferences customMusicAppNowPlayingViewTintColor];
 			%init(customMusicAppNowPlayingViewTintColorGroup,
+			NowPlayingViewController = NSClassFromString(@"MusicApplication.NowPlayingViewController"),
 			PlayerTimeControl = NSClassFromString(@"MusicApplication.PlayerTimeControl"),
 			NowPlayingTransportButton = NSClassFromString(@"MusicApplication.NowPlayingTransportButton"),
 			MiniPlayerViewController = NSClassFromString(@"MusicApplication.MiniPlayerViewController"),

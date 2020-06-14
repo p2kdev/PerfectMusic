@@ -629,7 +629,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>NOW PLAYING VIEW - CUSTOM TINT COLOR</string>
+			<string>NOW PLAYING VIEW - STATIC COLORS</string>
 			<key>footerText</key>
 			<string>'ENABLE DYNAMIC COLORS' OPTION SHOULD BE DISABLED FOR THE TINT COLOR TO BE APPLIED TO THE 'NOW PLAYING' VIEW.</string>
 		</dict>
@@ -641,9 +641,75 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusic13prefs</string>
 			<key>key</key>
+			<string>enableMusicAppNowPlayingViewCustomBackgroundColor</string>
+			<key>label</key>
+			<string>Custom Background Color</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusic13prefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewBackgroundColor</string>
+				<key>fallback</key>
+				<string>#FFFFFF</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Custom Background Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewBackgroundColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewCustomBorderColor</string>
+			<key>label</key>
+			<string>Custom Border Color</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusic13prefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewBorderColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Custom Border Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewBorderColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusic13prefs</string>
+			<key>key</key>
 			<string>enableMusicAppNowPlayingViewCustomTint</string>
 			<key>label</key>
-			<string>Enable Custom Tint</string>
+			<string>Custom Tint Color</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -664,7 +730,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>label</key>
 			<string>Custom Tint Color</string>
 			<key>key</key>
-			<string>customMusicAppTintColor</string>
+			<string>customMusicAppNowPlayingViewTintColor</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -682,7 +748,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>key</key>
 			<string>enableMusicAppCustomTint</string>
 			<key>label</key>
-			<string>Enable Custom Tint</string>
+			<string>Custom Tint Color</string>
 		</dict>
 		<dict>
 			<key>cell</key>

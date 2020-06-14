@@ -73,6 +73,8 @@
 		@"vibrateMusicApp": @NO,
 		@"enableMusicAppCustomTint": @NO,
 		@"enableMusicAppNowPlayingViewCustomTint": @NO,
+		@"enableMusicAppNowPlayingViewCustomBackgroundColor": @NO,
+		@"enableMusicAppNowPlayingViewCustomBorderColor": @NO,
 	}];
 
 	_enabled = [_preferences boolForKey: @"enabled"];
@@ -122,11 +124,15 @@
 	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
 	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];
 	_enableMusicAppNowPlayingViewCustomTint = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomTint"];
-	if(_enableMusicAppCustomTint || _enableMusicAppNowPlayingViewCustomTint)
+	_enableMusicAppNowPlayingViewCustomBackgroundColor = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomBackgroundColor"];
+	_enableMusicAppNowPlayingViewCustomBorderColor = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomBorderColor"];
+	if(_enableMusicAppCustomTint || _enableMusicAppNowPlayingViewCustomTint || _enableMusicAppNowPlayingViewCustomBackgroundColor || _enableMusicAppNowPlayingViewCustomBorderColor)
 	{
 		NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.colors.plist"];
 		_customMusicAppTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppTintColor"] withFallback: @"#FF9400"];
 		_customMusicAppNowPlayingViewTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewTintColor"] withFallback: @"#FF9400"];
+		_customMusicAppNowPlayingViewBackgroundColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewBackgroundColor"] withFallback: @"#FFFFFF"];
+		_customMusicAppNowPlayingViewBorderColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewBorderColor"] withFallback: @"#FF9400"];
 	}
 
 	return self;

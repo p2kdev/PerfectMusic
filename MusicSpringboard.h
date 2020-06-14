@@ -58,6 +58,9 @@
 - (id)_nowPlayingInfo;
 @end
 
+@interface CSAdjunctItemView: UIView
+@end
+
 @interface MPButton: UIButton
 - (BOOL)isHolding;
 @end
@@ -76,6 +79,7 @@
 @property(nonatomic, retain) MediaControlsTransportButton *leftButton;
 @property(nonatomic, retain) MediaControlsTransportButton *middleButton;
 @property(nonatomic, retain) MediaControlsTransportButton *rightButton;
+- (MediaControlsTransportButton *)tvRemoteButton;
 - (id)_createTransportButton;
 - (void)setStyle:(long long)arg1;
 - (MediaControlsTransportButton*)tvRemoteButton;
