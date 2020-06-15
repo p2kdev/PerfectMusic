@@ -2,8 +2,8 @@
 #import "MusicPreferences.h"
 
 static NSInteger style;
-static BOOL hideAlbumArtwork;
-static BOOL hideRoutingButton;
+static BOOL lockScreenMusicWidgetHideAlbumArtwork;
+static BOOL lockScreenMusicWidgetHideRoutingButton;
 static BOOL isIpad;
 
 static CGFloat mediaWidgetWidth = 0;
@@ -43,7 +43,7 @@ static CGFloat mediaWidgetWidth = 0;
 
 	if([[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
 	{
-		if(!hideRoutingButton)
+		if(!lockScreenMusicWidgetHideRoutingButton)
 			[[[self nowPlayingHeaderView] routingButton] setTransform: CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)];
 
 		if(style != 1)
@@ -78,7 +78,7 @@ static CGFloat mediaWidgetWidth = 0;
 {
 	if([[[self _viewControllerForAncestor] parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
 	{
-		if(hideAlbumArtwork)
+		if(lockScreenMusicWidgetHideAlbumArtwork)
 		{
 			frame.origin.x = 18;
 			frame.size.width = mediaWidgetWidth * (isIpad ? 0.6655 : 0.5571);
@@ -115,7 +115,7 @@ static CGFloat mediaWidgetWidth = 0;
 
 - (void)setFrame: (CGRect)frame
 {
-	if(!hideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+	if(!lockScreenMusicWidgetHideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
 		if(isIpad)
 		{
@@ -139,7 +139,7 @@ static CGFloat mediaWidgetWidth = 0;
 - (CGRect)frame
 {
 	CGRect frame = %orig;
-	if(!hideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+	if(!lockScreenMusicWidgetHideRoutingButton && [[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
 		if(isIpad)
 		{
@@ -208,8 +208,6 @@ static CGFloat mediaWidgetWidth = 0;
 
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
-		[[[self transportStackView] tvRemoteButton] removeFromSuperview];
-
 		MediaControlsTimeControl *timeControl = [self timeControl];
 		if(style == 1)
 		{
@@ -253,13 +251,21 @@ static CGFloat mediaWidgetWidth = 0;
 	return frame;
 }
 
+- (void)layoutSubviews
+{
+	%orig;
+	
+	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+		[[self tvRemoteButton] setHidden: YES];
+}
+
 %end
 
 void initCompactMediaPlayer()
 {
 	style = [[MusicPreferences sharedInstance] lockScreenMusicWidgetCompactStyle];
-	hideAlbumArtwork = [[MusicPreferences sharedInstance] hideAlbumArtwork];
-	hideRoutingButton = [[MusicPreferences sharedInstance] hideRoutingButton];
+	lockScreenMusicWidgetHideAlbumArtwork = [[MusicPreferences sharedInstance] lockScreenMusicWidgetHideAlbumArtwork];
+	lockScreenMusicWidgetHideRoutingButton = [[MusicPreferences sharedInstance] lockScreenMusicWidgetHideRoutingButton];
 	isIpad = [[MusicPreferences sharedInstance] isIpad];
 
 	%init;

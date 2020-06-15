@@ -4,9 +4,6 @@
 
 static const float VOLUME_STEP =  1.0 / 16.0;
 
-static BOOL upPressed = NO;
-static BOOL downPressed = NO;
-
 static NSTimer *forwardTimer;
 static NSTimer *backTimer;
 
@@ -63,33 +60,14 @@ static void produceMediumVibration()
 			long pressType = [press type];
 			CGFloat pressForce = [press force];
 
-			if(pressType == 102 && pressForce == 1) //VOLUME UP PRESSED
-			{
-				upPressed = YES;
-				forwardTimer = [NSTimer scheduledTimerWithTimeInterval: 0.3 target: self selector: @selector(goForward) userInfo: nil repeats: NO];
-				if(backTimer != nil)
-				{
-					[backTimer invalidate];
-					backTimer = nil;
-				}
-			}
-
-			if(pressType == 103 && pressForce == 1) //VOLUME DOWN PRESSED
-			{
-				downPressed = YES;
-				backTimer = [NSTimer scheduledTimerWithTimeInterval: 0.3 target: self selector: @selector(goBackward) userInfo: nil repeats: NO];
-				if(forwardTimer != nil)
-				{
-					[forwardTimer invalidate];
-					forwardTimer = nil;
-				}
-			}
-
 			if(pressType == 102 && pressForce == 0) //VOLUME UP RELEASED
 			{
-				upPressed = NO;
+				backTimer = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(invalidateBack) userInfo: nil repeats: NO];
 				if(forwardTimer != nil)
 				{
+					MRMediaRemoteSendCommand(kMRNextTrack, nil);
+					produceMediumVibration();
+
 					[forwardTimer invalidate];
 					forwardTimer = nil;
 				}
@@ -97,9 +75,12 @@ static void produceMediumVibration()
 
 			if(pressType == 103 && pressForce == 0) //VOLUME DOWN RELEASED
 			{
-				downPressed = NO;
+				forwardTimer = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector: @selector(invalidateForward) userInfo: nil repeats: NO];
 				if(backTimer != nil)
 				{
+					MRMediaRemoteSendCommand(kMRPreviousTrack, nil);
+					produceMediumVibration();
+
 					[backTimer invalidate];
 					backTimer = nil;
 				}
@@ -109,25 +90,17 @@ static void produceMediumVibration()
 	}
 
 	%new
-	- (void)goForward
+	- (void)invalidateForward
 	{
-		if(upPressed)
-		{
-			MRMediaRemoteSendCommand(kMRNextTrack, nil);
-			produceMediumVibration();	
-		}
-		upPressed = NO;
+		[forwardTimer invalidate];
+		forwardTimer = nil;
 	}
 
 	%new
-	- (void)goBackward
+	- (void)invalidateBack
 	{
-		if(downPressed)
-		{
-			MRMediaRemoteSendCommand(kMRPreviousTrack, nil);
-			produceMediumVibration();
-		}
-		downPressed = NO;
+		[backTimer invalidate];
+		backTimer = nil;
 	}
 
 	%end
@@ -162,24 +135,18 @@ static void produceMediumVibration()
 
 	- (void)increaseVolume
 	{
-		if(!forwardTimer)
-		{
-			if(shouldSwap)
-				[self changeVolumeByDelta: -VOLUME_STEP];
-			else
-				%orig;
-		}
+		if(shouldSwap)
+			[self changeVolumeByDelta: -VOLUME_STEP];
+		else
+			%orig;
 	}
 
 	- (void)decreaseVolume
 	{
-		if(!backTimer)
-		{
-			if(shouldSwap)
-				[self changeVolumeByDelta: VOLUME_STEP];
-			else
-				%orig;
-		}
+		if(shouldSwap)
+			[self changeVolumeByDelta: VOLUME_STEP];
+		else
+			%orig;
 	}
 
 	%end

@@ -9,7 +9,7 @@ GO_EASY_ON_ME = 1
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = PerfectMusic
-PerfectMusic_FILES = SLColorArt.m MusicPreferences.mm Colorizer.xm VolumeControl.xm ExtraPlaybackButtons.xm MediaNotification.xm CompactMediaPlayer.xm MusicSpringboard-Helper.xm MusicSpringboard.xm MusicApp-Helper.xm MusicApp.xm Init.xm
+PerfectMusic_FILES = $(wildcard *.xm *.mm *.m)
 PerfectMusic_CFLAGS = -fobjc-arc -Wno-logical-op-parentheses -Wno-unguarded-availability-new
 PerfectMusic_EXTRA_FRAMEWORKS += Cephei
 PerfectMusic_LIBRARIES += sparkcolourpicker

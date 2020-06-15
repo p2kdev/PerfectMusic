@@ -22,7 +22,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>enabled</string>
 			<key>label</key>
@@ -31,21 +31,20 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- VOLUME BUTTONS ---</string>
-			<key>alignment</key>
+			<key>footerText</key>
+			<string>------ VOLUME BUTTONS ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>'CONTROL MEDIA' OPTION:
-PRESS BOTH VOLUME UP + VOLUME DOWN TO PLAY / PAUSE MEDIA.
-HOLD VOLUME UP FOR NEXT SONG.
-HOLD VOLUME DOWN FOR PREVIOUS SONG.
-'SWAP BASED ON ORIENTATION' OPTION SWAPS VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT OR UPDSIDE DOWN.
-</string>
+			<string>PRESS VOLUME UP + VOLUME DOWN TO PLAY / PAUSE MEDIA.
+
+PRESS AND RELEASE VOLUME DOWN AND THEN PRESS AND RELEASE VOLUME UP FOR NEXT SONG.
+
+PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS SONG.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -53,7 +52,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>enabledMediaControlWithVolumeButtons</string>
 			<key>label</key>
@@ -61,11 +60,17 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>SWAP VOLUME BUTTONS WHEN DEVICE IS ON LANDSCAPE LEFT OR UPDSIDE DOWN.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>swapVolumeButtonsBasedOnOrientation</string>
 			<key>label</key>
@@ -74,9 +79,9 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- MEDIA NOTIFICATION ---</string>
-			<key>alignment</key>
+			<key>footerText</key>
+			<string>------ MEDIA NOTIFICATION ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
@@ -89,23 +94,43 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>showNotification</string>
+			<string>showNotificationOnSongChange</string>
 			<key>label</key>
 			<string>Show Notification On New Song</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- SHUFFLE - REPEAT BUTTONS ---</string>
-			<key>alignment</key>
+			<key>footerText</key>
+			<string>------ MUSIC WIDGET ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>GENERAL</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>vibrateMusicWidget</string>
+			<key>label</key>
+			<string>Add Vibrations To UI Elements</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SHUFFLE - REPEAT BUTTONS</string>
 			<key>footerText</key>
 			<string>'ADD TO LOCKSCREEN' OPTION IS ONLY APPLIED WHEN WIDGET STYLE IS NORMAL.</string>
 		</dict>
@@ -115,7 +140,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>addExtraButtonsToLockScreen</string>
 			<key>label</key>
@@ -127,7 +152,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>addExtraButtonsToControlCenter</string>
 			<key>label</key>
@@ -136,70 +161,10 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- LOCK SCREEN MUSIC WIDGET ---</string>
-			<key>alignment</key>
+			<key>footerText</key>
+			<string>------ LOCK SCREEN MUSIC WIDGET ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>COLORS</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>colorizeLockScreenMusicWidget</string>
-			<key>label</key>
-			<string>Colorize Widget</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>addLockScreenMusicWidgetBorder</string>
-			<key>label</key>
-			<string>Add Border</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>HIDE ELEMENTS</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>hideAlbumArtwork</string>
-			<key>label</key>
-			<string>Hide Album Artwork</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>hideRoutingButton</string>
-			<key>label</key>
-			<string>Hide Routing Button (Top Right)</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -213,7 +178,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>0</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetStyle</string>
 			<key>validTitles</key>
@@ -239,7 +204,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>0</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetCompactStyle</string>
 			<key>validTitles</key>
@@ -259,6 +224,78 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+			<string>GENERAL</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>lockscreenMusicWidgetTransparentBackground</string>
+			<key>label</key>
+			<string>Transparent Background</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetHideAlbumArtwork</string>
+			<key>label</key>
+			<string>Hide Album Artwork</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>lockScreenMusicWidgetHideRoutingButton</string>
+			<key>label</key>
+			<string>Hide Routing Button (Top Right)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>COLORS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableLockScreenMusicWidgetDynamicColors</string>
+			<key>label</key>
+			<string>Colorize Widget</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>addLockScreenMusicWidgetBorderDynamicColor</string>
+			<key>label</key>
+			<string>Add Border</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
 			<string>BACKGROUND COLOR ALPHA</string>
 		</dict>
 		<dict>
@@ -267,7 +304,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>1</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetBackgroundColorAlpha</string>
 			<key>isSegmented</key>
@@ -293,7 +330,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>1</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetBorderColorAlpha</string>
 			<key>isSegmented</key>
@@ -319,7 +356,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>3</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetBorderWidth</string>
 			<key>isSegmented</key>
@@ -345,7 +382,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>13</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>lockScreenMusicWidgetCornerRadius</string>
 			<key>isSegmented</key>
@@ -365,7 +402,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>disableTopLeftCornerRadius</string>
 			<key>label</key>
@@ -377,7 +414,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>disableTopRightCornerRadius</string>
 			<key>label</key>
@@ -389,7 +426,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>disableBottomLeftCornerRadius</string>
 			<key>label</key>
@@ -401,7 +438,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>disableBottomRightCornerRadius</string>
 			<key>label</key>
@@ -410,9 +447,9 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- CONTROL CENTER MUSIC WIDGET ---</string>
-			<key>alignment</key>
+			<key>footerText</key>
+			<string>------ CONTROL CENTER MUSIC WIDGET ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
@@ -427,9 +464,9 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>colorizeControlCenterMusicWidget</string>
+			<string>enableControlCenterMusicWidgetDynamicColors</string>
 			<key>label</key>
 			<string>Colorize Widget</string>
 		</dict>
@@ -439,7 +476,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>addControlCenterWidgetBorder</string>
 			<key>label</key>
@@ -457,7 +494,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>1</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>controlCenterMusicWidgetBackgroundColorAlpha</string>
 			<key>isSegmented</key>
@@ -483,7 +520,7 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<integer>1</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
 			<string>controlCenterMusicWidgetBorderColorAlpha</string>
 			<key>isSegmented</key>
@@ -500,44 +537,20 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- MUSIC WIDGET - OTHER OPTIONS ---</string>
-			<key>alignment</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>vibrateMusicWidget</string>
-			<key>label</key>
-			<string>Add Vibrations To UI Elements</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>--- MUSIC APP ---</string>
-			<key>alignment</key>
+			<string>------ MUSIC APP ------</string>
+			<key>footerAlignment</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>NOW PLAYING VIEW - DYNAMIC COLORS</string>
+			<string>GENERAL</string>
 			<key>footerText</key>
-			<string>FOR ANY COLORIZATION OPTION TO WORK, 'ENABLE COLORIZATION' SHOULD BE ENABLED. 'ADD BORDER TO NOW PLAYING VIEW' REQUIRES 'COLORIZE NOW PLAYING VIEW' OPTION TO BE ENABLED.</string>
+			<string>'CUST. RECENTLY ADDED COLUMNS' IS COMPATIBLE WITH IPHONE ONLY.
+
+'HIDE QUEUE HUD' HIDES THE ANNOYING POPUP THAT SHOWS UP WHEN YOU ADD A SONG TO THE QUEUE.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -545,253 +558,11 @@ HOLD VOLUME DOWN FOR PREVIOUS SONG.
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>colorizeMusicApp</string>
+			<string>enableMusicAppCustomRecentlyAddedColumnsNumber</string>
 			<key>label</key>
-			<string>Enable Dynamic Colors</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>colorizeNowPlayingView</string>
-			<key>label</key>
-			<string>Colorize Now Playing View</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>addMusicAppBorder</string>
-			<key>label</key>
-			<string>Add Border To Now Playing View</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>colorizeQueueView</string>
-			<key>label</key>
-			<string>Colorize Queue View</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>colorizeMiniPlayerView</string>
-			<key>label</key>
-			<string>Colorize Mini Player View</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>NOW PLAYING VIEW - BORDER WIDTH</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>default</key>
-			<integer>4</integer>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>musicAppBorderWidth</string>
-			<key>isSegmented</key>
-			<true/>
-			<key>segmentCount</key>
-			<integer>14</integer>
-			<key>min</key>
-			<integer>1</integer>
-			<key>max</key>
-			<integer>15</integer>
-			<key>showValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>NOW PLAYING VIEW - STATIC COLORS</string>
-			<key>footerText</key>
-			<string>'ENABLE DYNAMIC COLORS' OPTION SHOULD BE DISABLED FOR THE TINT COLOR TO BE APPLIED TO THE 'NOW PLAYING' VIEW.</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>enableMusicAppNowPlayingViewCustomBackgroundColor</string>
-			<key>label</key>
-			<string>Custom Background Color</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>com.johnzaro.perfectmusic13prefs.colors</string>
-				<key>key</key>
-				<string>customMusicAppNowPlayingViewBackgroundColor</string>
-				<key>fallback</key>
-				<string>#FFFFFF</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Custom Background Color</string>
-			<key>key</key>
-			<string>customMusicAppNowPlayingViewBackgroundColor</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>enableMusicAppNowPlayingViewCustomBorderColor</string>
-			<key>label</key>
-			<string>Custom Border Color</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>com.johnzaro.perfectmusic13prefs.colors</string>
-				<key>key</key>
-				<string>customMusicAppNowPlayingViewBorderColor</string>
-				<key>fallback</key>
-				<string>#FF9400</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Custom Border Color</string>
-			<key>key</key>
-			<string>customMusicAppNowPlayingViewBorderColor</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>enableMusicAppNowPlayingViewCustomTint</string>
-			<key>label</key>
-			<string>Custom Tint Color</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>com.johnzaro.perfectmusic13prefs.colors</string>
-				<key>key</key>
-				<string>customMusicAppNowPlayingViewTintColor</string>
-				<key>fallback</key>
-				<string>#FF9400</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Custom Tint Color</string>
-			<key>key</key>
-			<string>customMusicAppNowPlayingViewTintColor</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>ALL OTHER VIEWS - CUSTOM TINT COLOR</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>enableMusicAppCustomTint</string>
-			<key>label</key>
-			<string>Custom Tint Color</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>cellClass</key>
-			<string>SparkColourPickerCell</string>
-			<key>libsparkcolourpicker</key>
-			<dict>
-				<key>defaults</key>
-				<string>com.johnzaro.perfectmusic13prefs.colors</string>
-				<key>key</key>
-				<string>customMusicAppTintColor</string>
-				<key>fallback</key>
-				<string>#FF9400</string>
-				<key>alpha</key>
-				<false/>
-			</dict>
-			<key>label</key>
-			<string>Custom Tint Color</string>
-			<key>key</key>
-			<string>customMusicAppTintColor</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>OTHER OPTIONS</string>
-			<key>footerText</key>
-			<string>'3 ALBUMS IN RECENTLY ADDED' SHOWS 3 ALBUMS PER LINE IN RECENTLY ADDED ALBUMS SECTION. IPHONE ONLY.
-'HIDE QUEUE HUD' HIDES THE ANNOYING POPUP THAT SHOWS UP WHEN YOU ADD A SONG TO THE QUEUE.
-VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>enableCustomRecentlyAddedColumnsNumber</string>
-			<key>label</key>
-			<string>Custom 'Recently Added' Col.</string>
+			<string>Cust. 'Recently Added' Columns</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -799,9 +570,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<integer>3</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>customRecentlyAddedColumnsNumber</string>
+			<string>musicAppCustomRecentlyAddedColumnsNumber</string>
 			<key>validTitles</key>
 			<array>
       			<string>3 Columns</string>
@@ -821,9 +592,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>hideKeepOrClearAlert</string>
+			<string>musicAppHideKeepOrClearAlert</string>
 			<key>label</key>
 			<string>Hide Keep Or Clear Queue Alert</string>
 		</dict>
@@ -833,9 +604,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<integer>1</integer>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>keepOrClearAlertAction</string>
+			<string>musicAppKeepOrClearAlertAction</string>
 			<key>validTitles</key>
 			<array>
       			<string>Always Clear</string>
@@ -853,9 +624,9 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>hideQueueHUD</string>
+			<string>musicAppHideQueueHUD</string>
 			<key>label</key>
 			<string>Hide Queue HUD</string>
 		</dict>
@@ -865,23 +636,116 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>hideAlbumShadow</string>
+			<string>musicAppHideCellSeparators</string>
+			<key>label</key>
+			<string>Hide Cell Separators</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>vibrateMusicApp</string>
+			<key>label</key>
+			<string>Add Vibrations To UI Elements</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>GENERAL - CUSTOM APP TINT COLOR</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppCustomTintColor</string>
+			<key>label</key>
+			<string>Custom Tint Color</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>musicAppCustomTintColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Custom Tint Color</string>
+			<key>key</key>
+			<string>musicAppCustomTintColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>NOW PLAYING VIEW - GENERAL</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>hideMusicAppNowPlayingViewAlbumShadow</string>
 			<key>label</key>
 			<string>Hide Album Shadow</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
-			<key>key</key>
-			<string>hideSeparators</string>
+			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Hide Separators</string>
+			<string>NOW PLAYING VIEW - COLORS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>musicAppNowPlayingViewColorsStyle</string>
+			<key>validTitles</key>
+			<array>
+      			<string>Off</string>
+      			<string>Dynamic</string>
+      			<string>Static</string>
+			</array>
+      		<key>validValues</key>
+			<array>
+      			<string>0</string>
+      			<string>1</string>
+      			<string>2</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>DYNAMIC COLORS</string>
+			<key>footerText</key>
+			<string>'COLORIZE BACKGROUND' AND 'ADD BORDER' REQUIRES 'NOW PLAYING VIEW' OPTION TO BE ENABLED.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -889,11 +753,256 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.johnzaro.perfectmusic13prefs</string>
+			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
-			<string>vibrateMusicApp</string>
+			<string>enableMusicAppNowPlayingViewDynamicColors</string>
 			<key>label</key>
-			<string>Add Vibrations To UI Elements</string>
+			<string>Now Playing View Controls</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>musicAppNowPlayingViewBackgroundDynamicColor</string>
+			<key>label</key>
+			<string>&#x21B3; Colorize Background</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>addMusicAppNowPlayingViewBorderDynamicColor</string>
+			<key>label</key>
+			<string>&#x21B3; Add Border</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppQueueViewDynamicColors</string>
+			<key>label</key>
+			<string>Queue View</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppMiniPlayerViewDynamicColors</string>
+			<key>label</key>
+			<string>Mini Player View</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>STATIC COLORS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewBackgroundStaticColor</string>
+			<key>label</key>
+			<string>Colorize Background</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewBackgroundColor</string>
+				<key>fallback</key>
+				<string>#FFFFFF</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Background Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewBackgroundColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewBorderStaticColor</string>
+			<key>label</key>
+			<string>Colorize Border</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewBorderColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Border Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewBorderColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewButtonsStaticColor</string>
+			<key>label</key>
+			<string>Colorize Buttons</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewButtonsColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Buttons Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewButtonsColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewTimeControlsStaticColor</string>
+			<key>label</key>
+			<string>Colorize Time Controls</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewTimeControlsColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Time Controls Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewTimeControlsColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>enableMusicAppNowPlayingViewVolumeControlsStaticColor</string>
+			<key>label</key>
+			<string>Colorize Volume Controls</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>cellClass</key>
+			<string>SparkColourPickerCell</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>defaults</key>
+				<string>com.johnzaro.perfectmusicprefs.colors</string>
+				<key>key</key>
+				<string>customMusicAppNowPlayingViewVolumeControlsColor</string>
+				<key>fallback</key>
+				<string>#FF9400</string>
+				<key>alpha</key>
+				<false/>
+			</dict>
+			<key>label</key>
+			<string>Volume Controls Color</string>
+			<key>key</key>
+			<string>customMusicAppNowPlayingViewVolumeControlsColor</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>BORDER WIDTH</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>4</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>musicAppNowPlayingViewBorderWidth</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>14</integer>
+			<key>min</key>
+			<integer>1</integer>
+			<key>max</key>
+			<integer>15</integer>
+			<key>showValue</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -976,7 +1085,5 @@ VIBRATIONS ARE COMPATIBLE WITH IPHONE ONLY.</string>
    	 		<string>https://paypal.me/JohnZarogiannis</string>
 		</dict>
 	</array>
-	<key>title</key>
-	<string>perfectappswitcher13</string>
 </dict>
 </plist>

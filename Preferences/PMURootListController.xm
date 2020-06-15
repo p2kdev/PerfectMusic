@@ -83,11 +83,11 @@
 	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle: @"Confirm" style: UIAlertActionStyleDestructive handler:
         ^(UIAlertAction * action)
         {
-            [[[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectmusic13prefs"] removeAllObjects];
+            [[[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectmusicprefs"] removeAllObjects];
 
             NSFileManager *manager = [NSFileManager defaultManager];
-            [manager removeItemAtPath:@"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.plist" error: nil];
-            [manager removeItemAtPath:@"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.colors.plist" error: nil];
+            [manager removeItemAtPath: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusicprefs.plist" error: nil];
+            [manager removeItemAtPath: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusicprefs.colors.plist" error: nil];
             
             [self respring];
         }];

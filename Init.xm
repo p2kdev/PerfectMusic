@@ -1,13 +1,22 @@
 #import "MusicPreferences.h"
 
 extern void initVolumeControl();
-extern void initMusicWidgetHelper();
-extern void initMusicWidget();
-extern void initMusicApp();
-extern void initMusicAppHelper();
-extern void initExtraButtons();
+
 extern void initMediaNotification();
+
+extern void initExtraButtons();
+
 extern void initCompactMediaPlayer();
+
+extern void initMusicWidgetHelper();
+extern void initMusicWidget_DynamicColors();
+extern void initMusicWidget_OtherOptions();
+
+extern void initMusicAppHelper();
+extern void initMusicApp_OtherOptions();
+extern void initMusicApp_DynamicColors();
+extern void initMusicApp_StaticColors();
+
 
 static MusicPreferences *preferences;
 
@@ -24,20 +33,34 @@ static MusicPreferences *preferences;
 
             if(isSpringboard) 
             {
-                if([preferences showNotification])
+                initMusicWidgetHelper();
+
+                if([preferences enabledMediaControlWithVolumeButtons] || [preferences swapVolumeButtonsBasedOnOrientation])
+                    initVolumeControl();
+
+                if([preferences showNotificationOnSongChange])
                     initMediaNotification();
+
                 if([preferences addExtraButtonsToLockScreen] || [preferences addExtraButtonsToControlCenter])
                     initExtraButtons();
-                initVolumeControl();
-                initMusicWidgetHelper();
+
                 if([preferences lockScreenMusicWidgetStyle] == 1)
                     initCompactMediaPlayer();
-                initMusicWidget();
+                
+                initMusicWidget_DynamicColors();
+                initMusicWidget_OtherOptions();
             }
-            if(isMusicApp)
+            else if(isMusicApp)
             {
                 initMusicAppHelper();
-                initMusicApp();
+
+                initMusicApp_OtherOptions();
+
+                if([preferences musicAppNowPlayingViewColorsStyle] == 1)
+                    initMusicApp_DynamicColors();
+                else if([preferences musicAppNowPlayingViewColorsStyle] == 2)
+                    initMusicApp_StaticColors();
+
             }
         }
     }

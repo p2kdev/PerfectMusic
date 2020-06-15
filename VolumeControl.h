@@ -4,8 +4,8 @@
 
 @interface SpringBoard: UIApplication
 - (SBApplication*)_accessibilityFrontMostApplication;
-- (void)goForward;
-- (void)goBackward;
+- (void)invalidateForward;
+- (void)invalidateBack;
 @end
 
 @interface SBVolumeControl

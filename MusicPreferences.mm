@@ -20,127 +20,84 @@
 {
 	self = [super init];
 
-	_preferences = [[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectmusic13prefs"];
-	[_preferences registerDefaults:
-	@{
-		@"enabled": @NO,
-
-		//General
-		@"enabledMediaControlWithVolumeButtons": @NO,
-		@"swapVolumeButtonsBasedOnOrientation": @NO,
-		@"showNotification": @NO,
-
-		//Springboard
-		@"addExtraButtonsToLockScreen": @NO,
-		@"addExtraButtonsToControlCenter": @NO,
-
-		@"colorizeLockScreenMusicWidget": @NO,
-		@"hideAlbumArtwork": @NO,
-		@"hideRoutingButton": @NO,
-		@"lockScreenMusicWidgetStyle": @0,
-		@"lockScreenMusicWidgetCompactStyle": @0,
-		@"lockScreenMusicWidgetBackgroundColorAlpha": @1.0,
-		@"lockScreenMusicWidgetCornerRadius": @13,
-		@"disableTopLeftCornerRadius": @NO,
-		@"disableTopRightCornerRadius": @NO,
-		@"disableBottomLeftCornerRadius": @NO,
-		@"disableBottomRightCornerRadius": @NO,
-		@"addLockScreenMusicWidgetBorder": @NO,
-		@"lockScreenMusicWidgetBorderColorAlpha": @1.0,
-		@"lockScreenMusicWidgetBorderWidth": @3,
-
-		@"colorizeControlCenterMusicWidget": @NO,
-		@"controlCenterMusicWidgetBackgroundColorAlpha": @1.0,
-		@"addControlCenterWidgetBorder": @NO,
-		@"controlCenterMusicWidgetBorderColorAlpha": @1.0,
-
-		@"vibrateMusicWidget": @NO,
-
-		//MusicApp
-		@"colorizeMusicApp": @NO,
-		@"colorizeNowPlayingView": @NO,
-		@"colorizeQueueView": @NO,
-		@"colorizeMiniPlayerView": @NO,
-		@"addMusicAppBorder": @NO,
-		@"hideAlbumShadow": @NO,
-		@"musicAppBorderWidth": @4,
-		@"enableCustomRecentlyAddedColumnsNumber": @NO,
-		@"customRecentlyAddedColumnsNumber": @3,
-		@"hideQueueHUD": @NO,
-		@"hideKeepOrClearAlert": @NO,
-		@"keepOrClearAlertAction": @1,
-		@"hideSeparators": @NO,
-		@"vibrateMusicApp": @NO,
-		@"enableMusicAppCustomTint": @NO,
-		@"enableMusicAppNowPlayingViewCustomTint": @NO,
-		@"enableMusicAppNowPlayingViewCustomBackgroundColor": @NO,
-		@"enableMusicAppNowPlayingViewCustomBorderColor": @NO,
-	}];
-
-	_enabled = [_preferences boolForKey: @"enabled"];
-
-	_enabledMediaControlWithVolumeButtons = [_preferences boolForKey: @"enabledMediaControlWithVolumeButtons"];
-	_swapVolumeButtonsBasedOnOrientation = [_preferences boolForKey: @"swapVolumeButtonsBasedOnOrientation"];
-	_showNotification = [_preferences boolForKey: @"showNotification"];
-
-	_addExtraButtonsToLockScreen = [_preferences boolForKey: @"addExtraButtonsToLockScreen"];
-	_addExtraButtonsToControlCenter = [_preferences boolForKey: @"addExtraButtonsToControlCenter"];
-
-	_colorizeLockScreenMusicWidget = [_preferences boolForKey: @"colorizeLockScreenMusicWidget"];
-	_hideAlbumArtwork = [_preferences boolForKey: @"hideAlbumArtwork"];
-	_hideRoutingButton = [_preferences boolForKey: @"hideRoutingButton"];
-	_lockScreenMusicWidgetStyle = [_preferences integerForKey: @"lockScreenMusicWidgetStyle"];
-	_lockScreenMusicWidgetCompactStyle = [_preferences integerForKey: @"lockScreenMusicWidgetCompactStyle"];
-	_lockScreenMusicWidgetBackgroundColorAlpha = [_preferences doubleForKey: @"lockScreenMusicWidgetBackgroundColorAlpha"];
-	_lockScreenMusicWidgetCornerRadius = [_preferences integerForKey: @"lockScreenMusicWidgetCornerRadius"];
-	_disableTopLeftCornerRadius = [_preferences boolForKey: @"disableTopLeftCornerRadius"];
-	_disableTopRightCornerRadius = [_preferences boolForKey: @"disableTopRightCornerRadius"];
-	_disableBottomLeftCornerRadius = [_preferences boolForKey: @"disableBottomLeftCornerRadius"];
-	_disableBottomRightCornerRadius = [_preferences boolForKey: @"disableBottomRightCornerRadius"];
-	_addLockScreenMusicWidgetBorder = [_preferences boolForKey: @"addLockScreenMusicWidgetBorder"];
-	_lockScreenMusicWidgetBorderColorAlpha = [_preferences doubleForKey: @"lockScreenMusicWidgetBorderColorAlpha"];
-	_lockScreenMusicWidgetBorderWidth = [_preferences integerForKey: @"lockScreenMusicWidgetBorderWidth"];
-
-	_colorizeControlCenterMusicWidget = [_preferences boolForKey: @"colorizeControlCenterMusicWidget"];
-	_controlCenterMusicWidgetBackgroundColorAlpha = [_preferences doubleForKey: @"controlCenterMusicWidgetBackgroundColorAlpha"];
-	_addControlCenterWidgetBorder = [_preferences boolForKey: @"addControlCenterWidgetBorder"];
-	_controlCenterMusicWidgetBorderColorAlpha = [_preferences doubleForKey: @"controlCenterMusicWidgetBorderColorAlpha"];
-	
-	_vibrateMusicWidget = [_preferences boolForKey: @"vibrateMusicWidget"];
-
-	_colorizeMusicApp = [_preferences boolForKey: @"colorizeMusicApp"];
-	_colorizeNowPlayingView = [_preferences boolForKey: @"colorizeNowPlayingView"];
-	_colorizeQueueView = [_preferences boolForKey: @"colorizeQueueView"];
-	_colorizeMiniPlayerView = [_preferences boolForKey: @"colorizeMiniPlayerView"];
-	_addMusicAppBorder = [_preferences boolForKey: @"addMusicAppBorder"];
-	_hideAlbumShadow = [_preferences boolForKey: @"hideAlbumShadow"];
-	_musicAppBorderWidth = [_preferences integerForKey: @"musicAppBorderWidth"];
-	_enableCustomRecentlyAddedColumnsNumber = [_preferences boolForKey: @"enableCustomRecentlyAddedColumnsNumber"];
-	_customRecentlyAddedColumnsNumber = [_preferences integerForKey: @"customRecentlyAddedColumnsNumber"];
-	_hideQueueHUD = [_preferences boolForKey: @"hideQueueHUD"];
-	_hideKeepOrClearAlert = [_preferences boolForKey: @"hideKeepOrClearAlert"];
-	_keepOrClearAlertAction = [_preferences integerForKey: @"keepOrClearAlertAction"];
-	_hideSeparators = [_preferences boolForKey: @"hideSeparators"];
-	_vibrateMusicApp = [_preferences boolForKey: @"vibrateMusicApp"];
-	_enableMusicAppCustomTint = [_preferences boolForKey: @"enableMusicAppCustomTint"];
-	_enableMusicAppNowPlayingViewCustomTint = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomTint"];
-	_enableMusicAppNowPlayingViewCustomBackgroundColor = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomBackgroundColor"];
-	_enableMusicAppNowPlayingViewCustomBorderColor = [_preferences boolForKey: @"enableMusicAppNowPlayingViewCustomBorderColor"];
-	if(_enableMusicAppCustomTint || _enableMusicAppNowPlayingViewCustomTint || _enableMusicAppNowPlayingViewCustomBackgroundColor || _enableMusicAppNowPlayingViewCustomBorderColor)
+	_preferences = [[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectmusicprefs"];
+	[_preferences registerBool: &_enabled default: NO forKey: @"enabled"];
+	if(_enabled)
 	{
-		NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusic13prefs.colors.plist"];
-		_customMusicAppTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppTintColor"] withFallback: @"#FF9400"];
-		_customMusicAppNowPlayingViewTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewTintColor"] withFallback: @"#FF9400"];
+		NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithContentsOfFile: @"/var/mobile/Library/Preferences/com.johnzaro.perfectmusicprefs.colors.plist"];
+
+		[_preferences registerBool: &_enabledMediaControlWithVolumeButtons default: NO forKey: @"enabledMediaControlWithVolumeButtons"];
+		[_preferences registerBool: &_swapVolumeButtonsBasedOnOrientation default: NO forKey: @"swapVolumeButtonsBasedOnOrientation"];
+		
+		[_preferences registerBool: &_showNotificationOnSongChange default: NO forKey: @"_showNotificationOnSongChange"];
+
+		[_preferences registerBool: &_lockscreenMusicWidgetTransparentBackground default: NO forKey: @"lockscreenMusicWidgetTransparentBackground"];
+		[_preferences registerBool: &_vibrateMusicWidget default: NO forKey: @"vibrateMusicWidget"];
+
+		[_preferences registerBool: &_addExtraButtonsToLockScreen default: NO forKey: @"addExtraButtonsToLockScreen"];
+		[_preferences registerBool: &_addExtraButtonsToControlCenter default: NO forKey: @"addExtraButtonsToControlCenter"];
+		
+		[_preferences registerInteger: &_lockScreenMusicWidgetStyle default: 0 forKey: @"lockScreenMusicWidgetStyle"];
+		[_preferences registerInteger: &_lockScreenMusicWidgetCompactStyle default: 0 forKey: @"lockScreenMusicWidgetCompactStyle"];
+
+		[_preferences registerBool: &_lockScreenMusicWidgetHideAlbumArtwork default: NO forKey: @"lockScreenMusicWidgetHideAlbumArtwork"];
+		[_preferences registerBool: &_lockScreenMusicWidgetHideRoutingButton default: NO forKey: @"lockScreenMusicWidgetHideRoutingButton"];
+
+		[_preferences registerBool: &_enableLockScreenMusicWidgetDynamicColors default: NO forKey: @"enableLockScreenMusicWidgetDynamicColors"];
+		[_preferences registerBool: &_addLockScreenMusicWidgetBorderDynamicColor default: NO forKey: @"addLockScreenMusicWidgetBorderDynamicColor"];
+		[_preferences registerDouble: &_lockScreenMusicWidgetBackgroundColorAlpha default: 1 forKey: @"lockScreenMusicWidgetBackgroundColorAlpha"];
+		[_preferences registerDouble: &_lockScreenMusicWidgetBorderColorAlpha default: 1 forKey: @"lockScreenMusicWidgetBorderColorAlpha"];
+		[_preferences registerInteger: &_lockScreenMusicWidgetBorderWidth default: 3 forKey: @"lockScreenMusicWidgetBorderWidth"];
+
+		[_preferences registerInteger: &_lockScreenMusicWidgetCornerRadius default: 13 forKey: @"lockScreenMusicWidgetCornerRadius"];
+		[_preferences registerBool: &_disableTopLeftCornerRadius default: NO forKey: @"disableTopLeftCornerRadius"];
+		[_preferences registerBool: &_disableTopRightCornerRadius default: NO forKey: @"disableTopRightCornerRadius"];
+		[_preferences registerBool: &_disableBottomLeftCornerRadius default: NO forKey: @"disableBottomLeftCornerRadius"];
+		[_preferences registerBool: &_disableBottomRightCornerRadius default: NO forKey: @"disableBottomRightCornerRadius"];
+
+		[_preferences registerBool: &_enableControlCenterMusicWidgetDynamicColors default: NO forKey: @"enableControlCenterMusicWidgetDynamicColors"];
+		[_preferences registerBool: &_addControlCenterWidgetBorder default: NO forKey: @"addControlCenterWidgetBorder"];
+		[_preferences registerDouble: &_controlCenterMusicWidgetBackgroundColorAlpha default: 1 forKey: @"controlCenterMusicWidgetBackgroundColorAlpha"];
+		[_preferences registerDouble: &_controlCenterMusicWidgetBorderColorAlpha default: 1 forKey: @"controlCenterMusicWidgetBorderColorAlpha"];
+		
+		[_preferences registerBool: &_enableMusicAppCustomRecentlyAddedColumnsNumber default: NO forKey: @"enableMusicAppCustomRecentlyAddedColumnsNumber"];
+		[_preferences registerInteger: &_musicAppCustomRecentlyAddedColumnsNumber default: 3 forKey: @"musicAppCustomRecentlyAddedColumnsNumber"];
+		[_preferences registerBool: &_musicAppHideKeepOrClearAlert default: NO forKey: @"musicAppHideKeepOrClearAlert"];
+		[_preferences registerInteger: &_musicAppKeepOrClearAlertAction default: 1 forKey: @"musicAppKeepOrClearAlertAction"];
+		[_preferences registerBool: &_musicAppHideQueueHUD default: NO forKey: @"musicAppHideQueueHUD"];
+		[_preferences registerBool: &_musicAppHideCellSeparators default: NO forKey: @"musicAppHideCellSeparators"];
+		[_preferences registerBool: &_vibrateMusicApp default: NO forKey: @"vibrateMusicApp"];
+
+		[_preferences registerBool: &_enableMusicAppCustomTintColor default: NO forKey: @"enableMusicAppCustomTintColor"];
+		_musicAppCustomTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"musicAppCustomTintColor"] withFallback: @"#FF9400"];
+
+		[_preferences registerBool: &_hideMusicAppNowPlayingViewAlbumShadow default: NO forKey: @"hideMusicAppNowPlayingViewAlbumShadow"];
+
+		[_preferences registerInteger: &_musicAppNowPlayingViewColorsStyle default: 0 forKey: @"musicAppNowPlayingViewColorsStyle"];
+
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewDynamicColors default: NO forKey: @"enableMusicAppNowPlayingViewDynamicColors"];
+		[_preferences registerBool: &_musicAppNowPlayingViewBackgroundDynamicColor default: NO forKey: @"musicAppNowPlayingViewBackgroundDynamicColor"];
+		[_preferences registerBool: &_addMusicAppNowPlayingViewBorderDynamicColor default: NO forKey: @"addMusicAppNowPlayingViewBorderDynamicColor"];
+		[_preferences registerBool: &_enableMusicAppQueueViewDynamicColors default: NO forKey: @"enableMusicAppQueueViewDynamicColors"];
+		[_preferences registerBool: &_enableMusicAppMiniPlayerViewDynamicColors default: NO forKey: @"enableMusicAppMiniPlayerViewDynamicColors"];
+		
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewBackgroundStaticColor default: NO forKey: @"enableMusicAppNowPlayingViewBackgroundStaticColor"];
 		_customMusicAppNowPlayingViewBackgroundColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewBackgroundColor"] withFallback: @"#FFFFFF"];
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewBorderStaticColor default: NO forKey: @"enableMusicAppNowPlayingViewBorderStaticColor"];
 		_customMusicAppNowPlayingViewBorderColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewBorderColor"] withFallback: @"#FF9400"];
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewButtonsStaticColor default: NO forKey: @"enableMusicAppNowPlayingViewButtonsStaticColor"];
+		_customMusicAppNowPlayingViewButtonsColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewButtonsColor"] withFallback: @"#FF9400"];
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewTimeControlsStaticColor default: NO forKey: @"enableMusicAppNowPlayingViewTimeControlsStaticColor"];
+		_customMusicAppNowPlayingViewTimeControlsColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewTimeControlsColor"] withFallback: @"#FF9400"];
+		[_preferences registerBool: &_enableMusicAppNowPlayingViewVolumeControlsStaticColor default: NO forKey: @"enableMusicAppNowPlayingViewVolumeControlsStaticColor"];
+		_customMusicAppNowPlayingViewVolumeControlsColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"customMusicAppNowPlayingViewVolumeControlsColor"] withFallback: @"#FF9400"];
+		
+		[_preferences registerInteger: &_musicAppNowPlayingViewBorderWidth default: 4 forKey: @"musicAppNowPlayingViewBorderWidth"];
+
+		_isIpad = IS_iPAD;
 	}
 
 	return self;
-}
-
-- (BOOL)isIpad
-{
-	return IS_iPAD;
 }
 
 @end

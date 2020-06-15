@@ -5,52 +5,74 @@
 	HBPreferences *_preferences;
 }
 @property(nonatomic, readonly) BOOL enabled;
-@property(nonatomic, readonly) BOOL showNotification;
+
 @property(nonatomic, readonly) BOOL enabledMediaControlWithVolumeButtons;
 @property(nonatomic, readonly) BOOL swapVolumeButtonsBasedOnOrientation;
+
+@property(nonatomic, readonly) BOOL showNotificationOnSongChange;
+
+@property(nonatomic, readonly) BOOL lockscreenMusicWidgetTransparentBackground;
+@property(nonatomic, readonly) BOOL vibrateMusicWidget;
+
 @property(nonatomic, readonly) BOOL addExtraButtonsToLockScreen;
 @property(nonatomic, readonly) BOOL addExtraButtonsToControlCenter;
-@property(nonatomic, readonly) BOOL colorizeLockScreenMusicWidget;
-@property(nonatomic, readonly) BOOL hideAlbumArtwork;
-@property(nonatomic, readonly) BOOL hideRoutingButton;
+
 @property(nonatomic, readonly) NSInteger lockScreenMusicWidgetStyle;
 @property(nonatomic, readonly) NSInteger lockScreenMusicWidgetCompactStyle;
+
+@property(nonatomic, readonly) BOOL lockScreenMusicWidgetHideAlbumArtwork;
+@property(nonatomic, readonly) BOOL lockScreenMusicWidgetHideRoutingButton;
+
+@property(nonatomic, readonly) BOOL enableLockScreenMusicWidgetDynamicColors;
+@property(nonatomic, readonly) BOOL addLockScreenMusicWidgetBorderDynamicColor;
 @property(nonatomic, readonly) CGFloat lockScreenMusicWidgetBackgroundColorAlpha;
+@property(nonatomic, readonly) CGFloat lockScreenMusicWidgetBorderColorAlpha;
+@property(nonatomic, readonly) NSInteger lockScreenMusicWidgetBorderWidth;
+
 @property(nonatomic, readonly) NSInteger lockScreenMusicWidgetCornerRadius;
 @property(nonatomic, readonly) BOOL disableTopLeftCornerRadius;
 @property(nonatomic, readonly) BOOL disableTopRightCornerRadius;
 @property(nonatomic, readonly) BOOL disableBottomLeftCornerRadius;
 @property(nonatomic, readonly) BOOL disableBottomRightCornerRadius;
-@property(nonatomic, readonly) BOOL addLockScreenMusicWidgetBorder;
-@property(nonatomic, readonly) CGFloat lockScreenMusicWidgetBorderColorAlpha;
-@property(nonatomic, readonly) NSInteger lockScreenMusicWidgetBorderWidth;
-@property(nonatomic, readonly) BOOL colorizeControlCenterMusicWidget;
-@property(nonatomic, readonly) CGFloat controlCenterMusicWidgetBackgroundColorAlpha;
+
+@property(nonatomic, readonly) BOOL enableControlCenterMusicWidgetDynamicColors;
 @property(nonatomic, readonly) BOOL addControlCenterWidgetBorder;
+@property(nonatomic, readonly) CGFloat controlCenterMusicWidgetBackgroundColorAlpha;
 @property(nonatomic, readonly) CGFloat controlCenterMusicWidgetBorderColorAlpha;
-@property(nonatomic, readonly) BOOL vibrateMusicWidget;
-@property(nonatomic, readonly) BOOL colorizeMusicApp;
-@property(nonatomic, readonly) BOOL colorizeNowPlayingView;
-@property(nonatomic, readonly) BOOL colorizeQueueView;
-@property(nonatomic, readonly) BOOL colorizeMiniPlayerView;
-@property(nonatomic, readonly) BOOL addMusicAppBorder;
-@property(nonatomic, readonly) BOOL hideAlbumShadow;
-@property(nonatomic, readonly) NSInteger musicAppBorderWidth;
-@property(nonatomic, readonly) BOOL enableCustomRecentlyAddedColumnsNumber;
-@property(nonatomic, readonly) NSInteger customRecentlyAddedColumnsNumber;
-@property(nonatomic, readonly) BOOL hideQueueHUD;
-@property(nonatomic, readonly) BOOL hideKeepOrClearAlert;
-@property(nonatomic, readonly) NSInteger keepOrClearAlertAction;
-@property(nonatomic, readonly) BOOL hideSeparators;
+
+@property(nonatomic, readonly) BOOL enableMusicAppCustomRecentlyAddedColumnsNumber;
+@property(nonatomic, readonly) NSInteger musicAppCustomRecentlyAddedColumnsNumber;
+@property(nonatomic, readonly) BOOL musicAppHideKeepOrClearAlert;
+@property(nonatomic, readonly) NSInteger musicAppKeepOrClearAlertAction;
+@property(nonatomic, readonly) BOOL musicAppHideQueueHUD;
+@property(nonatomic, readonly) BOOL musicAppHideCellSeparators;
 @property(nonatomic, readonly) BOOL vibrateMusicApp;
-@property(nonatomic, readonly) BOOL enableMusicAppCustomTint;
-@property(nonatomic, readonly) UIColor *customMusicAppTintColor;
-@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomTint;
-@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewTintColor;
-@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomBackgroundColor;
+
+@property(nonatomic, readonly) BOOL enableMusicAppCustomTintColor;
+@property(nonatomic, readonly) UIColor *musicAppCustomTintColor;
+
+@property(nonatomic, readonly) BOOL hideMusicAppNowPlayingViewAlbumShadow;
+
+@property(nonatomic, readonly) NSInteger musicAppNowPlayingViewColorsStyle;
+
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewDynamicColors;
+@property(nonatomic, readonly) BOOL musicAppNowPlayingViewBackgroundDynamicColor;
+@property(nonatomic, readonly) BOOL addMusicAppNowPlayingViewBorderDynamicColor;
+@property(nonatomic, readonly) BOOL enableMusicAppQueueViewDynamicColors;
+@property(nonatomic, readonly) BOOL enableMusicAppMiniPlayerViewDynamicColors;
+
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewBackgroundStaticColor;
 @property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewBackgroundColor;
-@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewCustomBorderColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewBorderStaticColor;
 @property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewBorderColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewButtonsStaticColor;
+@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewButtonsColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewTimeControlsStaticColor;
+@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewTimeControlsColor;
+@property(nonatomic, readonly) BOOL enableMusicAppNowPlayingViewVolumeControlsStaticColor;
+@property(nonatomic, readonly) UIColor *customMusicAppNowPlayingViewVolumeControlsColor;
+
+@property(nonatomic, readonly) NSInteger musicAppNowPlayingViewBorderWidth;
 
 @property(nonatomic, readonly) BOOL isIpad;
 

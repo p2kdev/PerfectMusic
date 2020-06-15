@@ -1,11 +1,46 @@
-#import "MusicPreferences.h"
 #import "MusicApp.h"
+#import "MusicPreferences.h"
 #import "Colorizer.h"
+#import <sys/sysctl.h>
+
+static NSArray *const NOTCHED_IPHONES = @[@"iPhone10,3", @"iPhone10,6", @"iPhone11,2", @"iPhone11,6", @"iPhone11,8", @"iPhone12,1", @"iPhone12,3", @"iPhone12,5"];
 
 static MusicPreferences *preferences;
 
 static UIColor *customNowPlayingViewTintColor;
-static UIColor *systemBackgroundColor;
+static UIColor *staticBackgroundColor;
+
+BOOL getIsNotchediPhone()
+{
+    size_t size;
+    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
+    char *model = (char*)malloc(size);
+    sysctlbyname("hw.machine", model, &size, NULL, 0);
+    NSString *deviceModel = [NSString stringWithCString: model encoding: NSUTF8StringEncoding];
+    free(model);
+	HBLogWarn(@"asdfasdfadfasdf %@", deviceModel);
+    return [NOTCHED_IPHONES containsObject: deviceModel];
+}
+
+void roundCorners(UIView* view, double topCornerRadius, double bottomCornerRadius)
+{
+	CGRect bounds = [view bounds];
+	if(![preferences isIpad])
+		bounds.size.height -= 54;
+	
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    [maskLayer setFrame: bounds];
+    [maskLayer setPath: ((UIBezierPath*)[UIBezierPath roundedRectBezierPath: bounds withTopCornerRadius: topCornerRadius withBottomCornerRadius: bottomCornerRadius]).CGPath];
+    [[view layer] setMask: maskLayer];
+
+    CAShapeLayer *frameLayer = [CAShapeLayer layer];
+    [frameLayer setFrame: bounds];
+    [frameLayer setLineWidth: [preferences musicAppNowPlayingViewBorderWidth]];
+    [frameLayer setPath: [maskLayer path]];
+    [frameLayer setFillColor: nil];
+
+    [[view layer] addSublayer: frameLayer];
+}
 
 %hook MPVolumeSlider
 
@@ -56,10 +91,10 @@ static UIColor *systemBackgroundColor;
 	%orig;
     if([self specialButton])
 	{
-		if([preferences colorizeMusicApp])
+		if([preferences musicAppNowPlayingViewColorsStyle] == 1)
 			[self updateButtonColor];
-		else if([preferences enableMusicAppNowPlayingViewCustomTint])
-			[self setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+		else if([preferences musicAppNowPlayingViewColorsStyle] == 2)
+			[self setCustomButtonTintColorWithBackgroundColor: staticBackgroundColor];
 	}
 }
 
@@ -68,10 +103,10 @@ static UIColor *systemBackgroundColor;
 	%orig;
 	if([self specialButton])
 	{
-		if([preferences colorizeMusicApp])
+		if([preferences musicAppNowPlayingViewColorsStyle] == 1)
 			[self updateButtonColor];
-		else if([preferences enableMusicAppNowPlayingViewCustomTint])
-			[self setCustomButtonTintColorWithBackgroundColor: systemBackgroundColor];
+		else if([preferences musicAppNowPlayingViewColorsStyle] == 2)
+			[self setCustomButtonTintColorWithBackgroundColor: staticBackgroundColor];
 	}
 }
 
@@ -118,7 +153,7 @@ static UIColor *systemBackgroundColor;
 %new
 - (void)setCustomButtonTintColorWithBackgroundColor: (UIColor*)bgColor
 {
-	systemBackgroundColor = bgColor;
+	staticBackgroundColor = bgColor;
 
 	[[self layer] setCornerRadius: 7];
 
@@ -140,8 +175,8 @@ static UIColor *systemBackgroundColor;
 		}
 		else
 		{
-			[self setCustomTintColor: systemBackgroundColor];
-			[self setTintColor: systemBackgroundColor];
+			[self setCustomTintColor: staticBackgroundColor];
+			[self setTintColor: staticBackgroundColor];
 			[self setCustomBackgroundColor: customNowPlayingViewTintColor];
 			[self setBackgroundColor: customNowPlayingViewTintColor];
 		}
@@ -388,8 +423,9 @@ static UIColor *systemBackgroundColor;
 void initMusicAppHelper()
 {
 	preferences = [MusicPreferences sharedInstance];
-	if([preferences enableMusicAppNowPlayingViewCustomTint])
-		customNowPlayingViewTintColor = [preferences customMusicAppNowPlayingViewTintColor];
+	
+	if([preferences enableMusicAppNowPlayingViewButtonsStaticColor])
+		customNowPlayingViewTintColor = [preferences customMusicAppNowPlayingViewButtonsColor];
 
 	%init;
 }
